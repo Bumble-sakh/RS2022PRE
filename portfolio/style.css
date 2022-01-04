@@ -26,6 +26,13 @@ body {
   background-color: #000000;
 }
 
+button {
+  width: 220px;
+  height: 55px;
+  border: none;
+  cursor: pointer;
+}
+
 .container {
   width: 1440px;
   /* max-width: 1440px; */
@@ -117,5 +124,45 @@ body {
 }
 
 /* Main */
+
+/* Hero */
+
+.hero-container {
+  background-image: url('assets/img/bg.jpg');
+  background-position: center -90px;
+  background-repeat: no-repeat;
+  height: 910px;
+}
+
+.hero {
+  padding: 160px 860px 0 80px;
+}
+
+.hero-title {
+  margin: 0;
+  padding: 22px 0;
+  font: var(--font-h1);
+  color: var(--color-white);
+}
+
+.hero-text {
+  font: var(--font-normal);
+  color: var(--color-white);
+  margin: 0;
+  padding-top: 11px;
+  padding-right: 20px;
+  line-height: 2;
+}
+
+.hero-btn {
+  margin-top: 25px;
+  font: var(--font-normal);
+  color: var(--color-black);
+  background-color: var(--color-gold);
+}
+
+.hero-btn:hover {
+  color: var(--color-white);
+}
 
 /* Footer */
