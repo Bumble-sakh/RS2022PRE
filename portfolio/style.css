@@ -1,0 +1,19 @@
+@font-face {
+  font-family: 'Inter';
+  src: url('assets/fonts/Inter-Variable.ttf');
+}
+
+@font-face {
+  font-family: 'Merriweather';
+  src: url('assets/fonts/Merriweather-Bold.ttf');
+}
+
+:root {
+  --font-h1: 700 60px 'Merriweather', serif;
+  --font-h2: 700 40px 'Merriweather', serif;
+  --font-h3: 700 26px 'Merriweather', serif;
+  --font-h4: 700 24px 'Merriweather', serif;
+  --font-normal: 400 20px 'Inter', sans-serif;
+  --font-subtitle: 400 18px 'Inter', sans-serif;
+  --font-title: 600 20px 'Inter', sans-serif;
+}
