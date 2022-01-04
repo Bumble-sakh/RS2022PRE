@@ -39,6 +39,35 @@ button {
   margin: 0 auto;
 }
 
+/* Section title and line */
+
+.section-title {
+  position: relative;
+  display: inline;
+  padding: 0 20px;
+  margin: 0 auto;
+  text-align: center;
+  font: var(--font-h2);
+  color: var(--color-gold);
+  background-color: var(--color-black);
+}
+
+.section-title-container {
+  text-align: center;
+  margin-bottom: 60px;
+}
+
+.section-title-container::before {
+  content: '';
+  display: block;
+  position: relative;
+  top: 25px;
+  margin: 0 auto;
+  background-color: var(--color-gold);
+  width: 700px;
+  height: 2px;
+}
+
 /* Header */
 
 .header-container {
@@ -163,6 +192,66 @@ button {
 
 .hero-btn:hover {
   color: var(--color-white);
+}
+
+/* Skills */
+
+.skills {
+  padding: 24px 20px;
+}
+
+.skills-items {
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  padding: 15px 0px;
+  margin-bottom: 75px;
+}
+
+.skill-item {
+  width: 320px;
+  height: 240px;
+  background-position: center top;
+}
+
+.skill-item:nth-child(1) {
+  background-image: url('assets/svg/camera.svg');
+  background-repeat: no-repeat;
+  background-size: 62px 50px;
+}
+
+.skill-item:nth-child(2) {
+  background-image: url('assets/svg/video.svg');
+  background-repeat: no-repeat;
+  background-size: 60px 50px;
+}
+
+.skill-item:nth-child(3) {
+  background-image: url('assets/svg/image.svg');
+  background-repeat: no-repeat;
+  background-size: 66px 50px;
+}
+
+.skill-item:nth-child(4) {
+  background-image: url('assets/svg/mic.svg');
+  background-repeat: no-repeat;
+  background-size: 32px 50px;
+}
+
+.skills-item-title {
+  font: var(--font-title);
+  color: var(--color-white);
+  text-align: center;
+  padding: 108px 0 28px;
+  letter-spacing: 0.3px;
+}
+
+.skills-item-subtitle {
+  font: var(--font-subtitle);
+  color: var(--color-white);
+  text-align: center;
+  padding: 0 20px;
+  line-height: 2;
 }
 
 /* Footer */
