@@ -26,6 +26,17 @@ body {
   background-color: #000000;
 }
 
+a {
+  font: var(--font-normal);
+  color: var(--color-white);
+  text-decoration: none;
+  transition: 0.3s;
+}
+
+a:hover {
+  color: var(--color-gold);
+}
+
 button {
   width: 220px;
   height: 55px;
@@ -457,3 +468,63 @@ button {
 }
 
 /* Footer */
+
+.footer .container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 43px;
+  margin-bottom: 50px;
+}
+
+.footer-copy {
+  font: var(--font-normal);
+  color: var(--color-white);
+  display: flex;
+  gap: 20px;
+  margin: 0 21px;
+}
+
+.footer-school {
+  padding-left: 60px;
+}
+
+.footer-social {
+  margin: 0 20px;
+}
+
+.footer-social ul {
+  display: flex;
+  gap: 20px;
+  list-style-type: none;
+}
+
+.social-link {
+  background-size: contain;
+  background-repeat: no-repeat;
+  transition: 0.3s;
+  display: block;
+  width: 32px;
+  height: 32px;
+}
+
+.social-link:hover {
+  filter: invert(26%) sepia(15%) saturate(638%) hue-rotate(7deg) brightness(92%)
+    contrast(87%);
+}
+
+.social-link.instagram {
+  background-image: url('assets/svg/social/inst.svg');
+}
+
+.social-link.facebook {
+  background-image: url('assets/svg/social/fb.svg');
+}
+
+.social-link.twitter {
+  background-image: url('assets/svg/social/tw.svg');
+}
+
+.social-link.printerest {
+  background-image: url('assets/svg/social/pinterest.svg');
+}
