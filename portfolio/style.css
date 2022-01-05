@@ -254,4 +254,43 @@ button {
   line-height: 2;
 }
 
+/* Portfolio */
+
+.portfolio {
+  margin-bottom: 100px;
+}
+
+.portfolio-nav {
+  display: flex;
+  justify-content: center;
+  gap: 5px;
+  padding-top: 15px;
+  padding-bottom: 60px;
+}
+
+.portfolio-nav-button {
+  font: var(--font-normal);
+  color: var(--color-gold);
+  background-color: var(--color-black);
+  border: 1px solid var(--color-gold);
+}
+
+.portfolio-nav-button:hover {
+  color: var(--color-white);
+}
+
+.portfolio-nav-button-active {
+  font: var(--font-normal);
+  color: var(--color-black);
+  background-color: var(--color-gold);
+  border: 1px solid var(--color-gold);
+}
+
+.portfolio-pictures {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 25px;
+}
+
 /* Footer */
