@@ -426,7 +426,7 @@ button {
 .contacts-form textarea {
   box-sizing: border-box;
   border: 2px solid var(--color-gold);
-  background: none;
+  background: rgba(0, 0, 0, 0.5);
   font: var(--font-normal);
   color: var(--color-gold);
   padding: 0;
