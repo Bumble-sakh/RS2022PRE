@@ -298,6 +298,7 @@ button {
 /* Video */
 
 .video {
+  box-sizing: border-box;
   padding: 13px;
 }
 
@@ -327,6 +328,63 @@ button {
   cursor: pointer;
   filter: invert(26%) sepia(15%) saturate(638%) hue-rotate(7deg) brightness(92%)
     contrast(87%);
+}
+
+/* Price */
+
+.price {
+  box-sizing: border-box;
+  padding: 25px 20px;
+  margin-bottom: 50px;
+}
+
+.price-cards {
+  display: flex;
+  gap: 25px;
+  padding: 15px 0;
+}
+
+.price-card {
+  width: 450px;
+  height: 505px;
+  box-sizing: border-box;
+  border: 2px solid var(--color-gold);
+  text-align: center;
+  padding: 43px;
+}
+
+.price-card-title {
+  font: var(--font-h3);
+  color: var(--color-white);
+  margin: 0 0 15px;
+  padding: 10px;
+  letter-spacing: 1.2px;
+}
+
+.price-card-amount {
+  margin: 0;
+  margin-bottom: 13px;
+  padding: 30px;
+  font: var(--font-h4);
+  color: var(--color-gold);
+  line-height: 2px;
+}
+
+.price-card-description {
+  display: block;
+  font: var(--font-subtitle);
+  color: var(--color-white);
+  line-height: 2;
+}
+
+.price-card-btn {
+  margin-top: 40px;
+  font: var(--font-normal);
+  background-color: var(--color-gold);
+}
+
+.price-card-btn:hover {
+  color: var(--color-white);
 }
 
 /* Footer */
