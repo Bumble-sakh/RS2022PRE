@@ -335,7 +335,7 @@ button {
 .price {
   box-sizing: border-box;
   padding: 25px 20px;
-  margin-bottom: 50px;
+  margin-bottom: 60px;
 }
 
 .price-cards {
@@ -385,6 +385,75 @@ button {
 
 .price-card-btn:hover {
   color: var(--color-white);
+}
+
+/* Contacts */
+
+.contacts {
+  background-image: url('assets/img/contacts.jpg');
+  /* background-repeat: no-repeat;
+  background-size: auto 700px;
+  background-position: center center; */
+  height: 700px;
+  display: flex;
+  justify-content: flex-end;
+}
+
+.contacts-container {
+  width: 450px;
+  margin: 75px 20px;
+}
+
+.contacts-form {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  margin-top: 55px;
+}
+
+.contacts-form input,
+.contacts-form textarea {
+  box-sizing: border-box;
+  border: 2px solid var(--color-gold);
+  background: none;
+  font: var(--font-normal);
+  color: var(--color-gold);
+  padding: 0;
+  padding-left: 18px;
+  height: 50px;
+}
+
+.contacts-form textarea {
+  height: 100px;
+  padding: 11px 18px;
+  resize: none;
+}
+
+.contacts-form input::placeholder,
+.contacts-form textarea::placeholder {
+  font: var(--font-normal);
+  color: var(--color-gold);
+}
+
+.contacts-form input:focus-visible,
+.contacts-form textarea:focus-visible {
+  outline: 1px solid var(--color-gold);
+}
+
+.contacts-form button {
+  margin-top: 10px;
+  font: var(--font-normal);
+  color: var(--color-black);
+  background-color: var(--color-gold);
+}
+
+.contacts-form button:hover {
+  color: var(--color-white);
+}
+
+.contacts-container .section-title {
+  background: none;
+  padding: 0;
 }
 
 /* Footer */
