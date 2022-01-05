@@ -31,6 +31,7 @@ button {
   height: 55px;
   border: none;
   cursor: pointer;
+  transition: 0.3s;
 }
 
 .container {
@@ -317,7 +318,6 @@ button {
   background-image: url('assets/svg/play-btn.svg');
   background-size: contain;
   background-repeat: no-repeat;
-  transition: 0.3s;
   display: block;
   width: 130px;
   height: 130px;
