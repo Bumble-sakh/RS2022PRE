@@ -15,6 +15,7 @@
   --font-h4: 700 24px 'Merriweather', serif;
   --font-normal: 400 20px 'Inter', sans-serif;
   --font-subtitle: 400 18px 'Inter', sans-serif;
+  --font-menu: 400 35px 'Inter', sans-serif;
   --font-title: 600 20px 'Inter', sans-serif;
 
   --color-black: #000000;
@@ -120,9 +121,65 @@ button {
 
 /* Burger */
 
+.burger {
+  width: 40px;
+  height: 32px;
+  position: relative;
+  z-index: 2;
+}
+
+.burger span {
+  display: block;
+  width: 33px;
+  height: 4px;
+  margin-bottom: 5px;
+  position: relative;
+
+  background: var(--color-white);
+  border-radius: 3px;
+
+  z-index: 2;
+
+  transform-origin: 4px 0px;
+
+  transition: transform 0.5s cubic-bezier(0.77, 0.2, 0.05, 1),
+    background 0.5s cubic-bezier(0.77, 0.2, 0.05, 1), opacity 0.55s ease;
+}
+
+.burger:hover span {
+  cursor: pointer;
+  background: var(--color-gold);
+  transition: 0.3s;
+}
+
+.burger span:first-child {
+  transform-origin: 0% 0%;
+}
+
+.burger span:nth-last-child(2) {
+  transform-origin: 0% 100%;
+}
+
+.burger.opened span:nth-last-child(3) {
+  opacity: 1;
+  transform: rotate(45deg) translate(0, -4px);
+}
+
+.burger.opened span:nth-last-child(2) {
+  opacity: 0;
+  transform: rotate(0deg) scale(0.2, 0.2);
+}
+
+.burger.opened span {
+  opacity: 1;
+  transform: rotate(-45deg) translate(0, -1px);
+}
+
 /* end Burger */
 
 .header-nav-menu {
+  position: relative;
+  overflow: hidden;
   padding: 0;
   margin: 0 15px;
   display: flex;
@@ -151,6 +208,7 @@ button {
   padding: 20px 20px 20px 0;
   display: flex;
   align-items: center;
+  justify-content: space-between;
   order: 1;
   width: 70px;
   height: 50px;
@@ -584,13 +642,53 @@ button {
 
   .header-nav {
     order: 1;
-    margin: 8px 64px 0 0;
+    margin: 8px 47px 0 0;
+  }
+
+  .header-nav-menu {
+    position: absolute;
+    top: 0;
+    right: -15px;
+    background-color: var(--color-black);
+    display: flex;
+    flex-direction: column;
+    width: 0;
+    height: 1024px;
+    z-index: 1;
+    transition: all 1s ease-in-out;
+  }
+
+  .header-nav-menu ul {
+    margin: 134px auto auto 72px;
+    line-height: 3.65;
+  }
+
+  .header-nav-menu.closed {
+    /* right: -635px; */
+    width: 0;
+  }
+
+  .header-nav-menu.opened {
+    /* right: -15px; */
+    width: 620px;
+  }
+
+  .header-nav-menu.closed ul {
+    display: none;
+  }
+
+  .header-nav-menu.opened ul {
+    display: block;
+  }
+
+  .header-nav-menu-link {
+    font: var(--font-menu);
   }
 
   .header-language {
     order: 0;
     margin-left: auto;
-    margin-right: 8px;
+    margin-right: 25px;
     padding: 0;
     width: 82px;
   }

@@ -46,3 +46,14 @@ ${checked} ссылки в футере ведут на github автора пр
 ${checked} интерактивность включает в себя не только изменение внешнего вида курсора, например, при помощи свойства cursor: pointer, но и другие визуальные эффекты, например, изменение цвета фона или цвета шрифта. Если в макете указаны стили при наведении и клике, для элемента указываем эти стили. Если в макете стили не указаны, реализуете их по своему усмотрению, руководствуясь общим стилем макета +5
 ${checked} обязательное требование к интерактивности: плавное изменение внешнего вида элемента при наведении и клике не влияющее на соседние элементы +5`)
 console.groupEnd()
+
+const burgerBtn = document.querySelector('.burger')
+const menu = document.querySelector('.header-nav-menu')
+
+burgerBtn.addEventListener('click', (e) => {
+  console.log(e.target)
+  menu.classList.toggle('closed')
+  menu.classList.toggle('opened')
+  // menu.classList.toggle('closed')
+  burgerBtn.classList.toggle('opened')
+})
