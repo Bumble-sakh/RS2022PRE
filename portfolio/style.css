@@ -872,3 +872,47 @@ button {
     padding: 0;
   }
 }
+
+@media (max-width: 620px) {
+  .header-nav-menu.opened {
+    /* right: -15px; */
+    width: 100vw;
+  }
+  .hero-text {
+    padding-right: 20px;
+  }
+}
+
+@media (max-width: 450px) {
+  button {
+    width: 160px;
+    height: 40px;
+  }
+
+  .section-title-container::before {
+    width: 85vw;
+  }
+
+  .hero-btn {
+    margin-top: 30px;
+  }
+
+  .portfolio-pictures img {
+    width: 85vw;
+  }
+
+  .price-card {
+    width: 85vw;
+  }
+
+  .price-card-btn {
+    margin-top: 10px;
+  }
+
+  .video-player {
+    max-width: 450px;
+    height: 227px;
+    background-size: 450px 227px;
+    margin: 70px 0px;
+  }
+}
