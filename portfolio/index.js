@@ -49,11 +49,18 @@ console.groupEnd()
 
 const burgerBtn = document.querySelector('.burger')
 const menu = document.querySelector('.header-nav-menu')
+const menuLinks = document.querySelectorAll('.header-nav-menu-link')
+const fade = document.querySelector('.fade')
 
-burgerBtn.addEventListener('click', (e) => {
-  console.log(e.target)
+const burgerMenuToggle = (e) => {
   menu.classList.toggle('closed')
   menu.classList.toggle('opened')
-  // menu.classList.toggle('closed')
   burgerBtn.classList.toggle('opened')
+  fade.classList.toggle('hide')
+}
+
+burgerBtn.addEventListener('click', burgerMenuToggle)
+fade.addEventListener('click', burgerMenuToggle)
+menuLinks.forEach((link) => {
+  link.addEventListener('click', burgerMenuToggle)
 })
