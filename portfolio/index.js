@@ -1,26 +1,15 @@
+/* Self rating */
+
 const checked = String.fromCodePoint(0x2705)
 
 console.info(
-  '%cСамооценка 110/110 :\n',
+  '%cСамооценка 85/85 :\n',
   'color: lightgreen; font-family:monospace; font-size: 14px; font-weight: 600;'
 )
 
-console.log(`${checked} Вёрстка валидная +10`)
-
-console.groupCollapsed(`${checked} Вёрстка семантическая +20`)
-console.log(`${checked} <header>, <main>, <footer> +2
-${checked} шесть элементов <section> (по количеству секций) +2
-${checked} только один заголовок <h1> +2
-${checked} пять заголовков <h2> (количество секций минус одна, у которой заголовок <h1>) +2
-${checked} один элемент <nav> (панель навигации) +2
-${checked} два списка ul > li > a (панель навигации, ссылки на соцсети) +2
-${checked} десять кнопок <button> +2
-${checked} два input: <input type="email"> и <input type="tel"> +2
-${checked} один элемент <textarea> +2
-${checked} три атрибута placeholder +2`)
-console.groupEnd()
-
-console.groupCollapsed(`${checked} Вёрстка соответствует макету +48`)
+console.groupCollapsed(
+  `${checked} Вёрстка соответствует макету. Ширина экрана 768px +48`
+)
 console.log(`${checked} блок <header> +6
 ${checked} секция hero +6
 ${checked} секция skills +6
@@ -31,18 +20,42 @@ ${checked} секция contacts +6
 ${checked} блок <footer> +6`)
 console.groupEnd()
 
-console.groupCollapsed(`${checked} Требования к css + 12`)
-console.log(`${checked} для построения сетки используются flex или grid +2
-${checked} при уменьшении масштаба страницы браузера вёрстка размещается по центру, а не сдвигается в сторону +2
-${checked} фоновый цвет тянется на всю ширину страницы +2
-${checked} иконки добавлены в формате .svg. SVG может быть добавлен любым способом. Обращаем внимание на формат, а не на способ добавления +2
-${checked} изображения добавлены в формате .jpg +2
-${checked} есть favicon +2`)
+console.groupCollapsed(
+  `${checked} Ни на одном из разрешений до 320px включительно не появляется горизонтальная полоса прокрутки. Весь контент страницы при этом сохраняется: не обрезается и не удаляется +15`
+)
+console.log(`${checked} нет полосы прокрутки при ширине страницы от 1440рх до 768рх +5
+${checked} нет полосы прокрутки при ширине страницы от 768рх до 480рх +5
+${checked} нет полосы прокрутки при ширине страницы от 480рх до 320рх +5`)
 console.groupEnd()
 
-console.groupCollapsed(`${checked} Интерактивность, реализуемая через css +20`)
-console.log(`${checked} плавная прокрутка по якорям +5
-${checked} ссылки в футере ведут на github автора проекта и на страницу курса https://rs.school/js-stage0/ +5
-${checked} интерактивность включает в себя не только изменение внешнего вида курсора, например, при помощи свойства cursor: pointer, но и другие визуальные эффекты, например, изменение цвета фона или цвета шрифта. Если в макете указаны стили при наведении и клике, для элемента указываем эти стили. Если в макете стили не указаны, реализуете их по своему усмотрению, руководствуясь общим стилем макета +5
-${checked} обязательное требование к интерактивности: плавное изменение внешнего вида элемента при наведении и клике не влияющее на соседние элементы +5`)
+console.groupCollapsed(
+  `${checked} На ширине экрана 768рх и меньше реализовано адаптивное меню +22`
+)
+console.log(`${checked} при ширине страницы 768рх панель навигации скрывается, появляется бургер-иконка +2
+${checked} при нажатии на бургер-иконку справа плавно появляется адаптивное меню, бургер-иконка изменяется на крестик +4
+${checked} высота адаптивного меню занимает всю высоту экрана. При ширине экрана 768-620рх вёрстка меню соответствует макету, когда экран становится уже, меню занимает всю ширину экрана +4
+${checked} при нажатии на крестик адаптивное меню плавно скрывается уезжая за правую часть экрана, крестик превращается в бургер-иконку +4
+${checked} бургер-иконка, которая при клике превращается в крестик, создана при помощи css-анимаций без использования изображений +2
+${checked} ссылки в адаптивном меню работают, обеспечивая плавную прокрутку по якорям +2
+${checked} при клике по ссылке в адаптивном меню адаптивное меню плавно скрывается, крестик превращается в бургер-иконку +4`)
 console.groupEnd()
+
+/* end self rating */
+
+const burgerBtn = document.querySelector('.burger')
+const menu = document.querySelector('.header-nav-menu')
+const menuLinks = document.querySelectorAll('.header-nav-menu-link')
+const fade = document.querySelector('.fade')
+
+const burgerMenuToggle = (e) => {
+  menu.classList.toggle('closed')
+  menu.classList.toggle('opened')
+  burgerBtn.classList.toggle('opened')
+  fade.classList.toggle('hide')
+}
+
+burgerBtn.addEventListener('click', burgerMenuToggle)
+fade.addEventListener('click', burgerMenuToggle)
+menuLinks.forEach((link) => {
+  link.addEventListener('click', burgerMenuToggle)
+})
