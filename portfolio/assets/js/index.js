@@ -42,6 +42,40 @@ console.groupEnd()
 
 /* end self rating */
 
+/* Global variables */
+import text from './translate.js'
+
+let language = 'en'
+
+const lngToggle = document.querySelector('.header-language')
+const textsList = document.querySelectorAll('[data-text]')
+
+/* Global functions */
+
+function setLocalStorage(variable, value) {
+  localStorage.setItem(variable, value)
+}
+
+function getLocalStorage() {
+  if (localStorage.getItem('language')) {
+    language = localStorage.getItem('language')
+    const lngBtn = document.querySelector(`[data-language='${language}']`)
+    lngBtn.classList.add('language-active')
+    translateText(language)
+  }
+}
+
+function translateText(lng) {
+  textsList.forEach((item) => {
+    const data = item.dataset.text
+    item.textContent = text[lng][data]
+  })
+}
+
+/* Global lisener */
+
+window.addEventListener('load', getLocalStorage)
+
 /* Burger */
 
 const burgerBtn = document.querySelector('.burger')
@@ -96,6 +130,27 @@ portfolioNav.addEventListener('click', (e) => {
       const pic = portfolioPictures.children[i]
       pic.src = `assets/img/portfolio/${season}/${i + 1}.jpg`
       pic.alt = `${season}-photo-${i + 1}`
+    }
+  }
+})
+
+/* Translate */
+
+lngToggle.addEventListener('click', (e) => {
+  if (e.target.classList.contains('language')) {
+    const lngActive = document.querySelector('.language-active')
+
+    if (e.target !== lngActive) {
+      const lng = e.target.dataset.language
+      language = lng
+      lngActive.classList.remove('language-active')
+      e.target.classList.add('language-active')
+
+      /* translate section */
+      translateText(lng)
+
+      /* local storage */
+      setLocalStorage('language', language)
     }
   }
 })

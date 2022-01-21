@@ -1,4 +1,4 @@
-const i18Obj = {
+const text = {
   'en': {
     'skills': 'Skills',
     'portfolio': 'Portfolio',
@@ -80,4 +80,4 @@ const i18Obj = {
     'send-message': 'Отправить'
   }
 }
-export default i18Obj;
+export default text;
