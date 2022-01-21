@@ -42,6 +42,8 @@ console.groupEnd()
 
 /* end self rating */
 
+/* Burger */
+
 const burgerBtn = document.querySelector('.burger')
 const menu = document.querySelector('.header-nav-menu')
 const menuLinks = document.querySelectorAll('.header-nav-menu-link')
@@ -58,4 +60,42 @@ burgerBtn.addEventListener('click', burgerMenuToggle)
 fade.addEventListener('click', burgerMenuToggle)
 menuLinks.forEach((link) => {
   link.addEventListener('click', burgerMenuToggle)
+})
+
+/* Portfolio images */
+const seasons = ['winter', 'spring', 'summer', 'autumn']
+
+;(function (seasons) {
+  let count = 0
+  seasons.forEach((season) => {
+    for (let i = 1; i <= 6; i++) {
+      const pic = new Image()
+      pic.src = `./assets/img/portfolio/${season}/${i}.jpg`
+      count++
+    }
+  })
+  console.info(`${count} images preloaded`)
+})(seasons)
+
+const portfolioNav = document.querySelector('.portfolio-nav')
+const portfolioPictures = document.querySelector('.portfolio-pictures')
+
+portfolioNav.addEventListener('click', (e) => {
+  if (e.target.classList.contains('portfolio-nav-button')) {
+    const season = e.target.dataset.season
+
+    for (const child of portfolioNav.children) {
+      e.target.classList.add('portfolio-nav-button-active')
+      if (child.classList.contains('portfolio-nav-button-active')) {
+        child.classList.remove('portfolio-nav-button-active')
+      }
+    }
+    e.target.classList.add('portfolio-nav-button-active')
+
+    for (let i = 0; i < portfolioPictures.children.length; i++) {
+      const pic = portfolioPictures.children[i]
+      pic.src = `assets/img/portfolio/${season}/${i + 1}.jpg`
+      pic.alt = `${season}-photo-${i + 1}`
+    }
+  }
 })
