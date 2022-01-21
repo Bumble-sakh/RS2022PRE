@@ -628,12 +628,18 @@ button {
 
 @media (max-width: 1440px) {
   .hero {
-    padding: 160px 300px 80px 60px;
+    padding: 160px 55% 80px 60px;
   }
 
   .skills-items {
     gap: 20px;
     justify-content: center;
+  }
+}
+
+@media (max-width: 920px) {
+  .hero {
+    padding: 160px 40% 80px 60px;
   }
 }
 
