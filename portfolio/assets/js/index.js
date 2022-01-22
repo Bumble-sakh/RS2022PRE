@@ -51,6 +51,11 @@ const lngToggle = document.querySelector('.header-language')
 const textsList = document.querySelectorAll('[data-text]')
 const portfolioNav = document.querySelector('.portfolio-nav')
 const portfolioPictures = document.querySelector('.portfolio-pictures')
+const themeToggle = document.querySelector('.header-theme')
+const burgerBtn = document.querySelector('.burger')
+const menu = document.querySelector('.header-nav-menu')
+const menuLinks = document.querySelectorAll('.header-nav-menu-link')
+const fade = document.querySelector('.fade')
 
 /* Global functions */
 
@@ -67,7 +72,7 @@ function getLocalStorage() {
     'autumn',
   ]
   const season = localStorage.getItem('season') || 'winter'
-  const theme = localStorage.getItem('theme') || 'dark'
+  const theme = localStorage.getItem('theme') || 'light'
 
   return {
     language: language,
@@ -115,6 +120,21 @@ function seasonActivate(target) {
   setLocalStorage('season', season)
 }
 
+function changeTheme(theme) {
+  for (const icon of themeToggle.children) {
+    icon.classList.remove('active')
+    if (icon.dataset.theme === theme) {
+      icon.classList.add('active')
+    }
+  }
+
+  for (const item of document.body.classList) {
+    document.body.classList.remove(item)
+  }
+
+  document.body.classList.add(`${theme}-theme`)
+}
+
 function initial() {
   // Language
   const lngBtn = document.querySelector(
@@ -124,10 +144,14 @@ function initial() {
   translateText(settings.language)
 
   // Season
-  const sAB = document.querySelector(`[data-season="${settings.season}"]`)
-  seasonActivate(sAB)
+  const seasonActiveBtn = document.querySelector(
+    `[data-season="${settings.season}"]`
+  )
+  seasonActivate(seasonActiveBtn)
 
   // Theme
+
+  changeTheme(settings.theme)
 
   // Preloader
   picPreloader(settings.seasons)
@@ -143,12 +167,7 @@ initial()
 
 /* Burger */
 
-const burgerBtn = document.querySelector('.burger')
-const menu = document.querySelector('.header-nav-menu')
-const menuLinks = document.querySelectorAll('.header-nav-menu-link')
-const fade = document.querySelector('.fade')
-
-const burgerMenuToggle = (e) => {
+function burgerMenuToggle(e) {
   if (window.innerWidth <= 768) {
     menu.classList.toggle('closed')
     menu.classList.toggle('opened')
@@ -188,5 +207,15 @@ lngToggle.addEventListener('click', (e) => {
       /* local storage */
       setLocalStorage('language', settings.language)
     }
+  }
+})
+
+/* Theme */
+
+themeToggle.addEventListener('click', (e) => {
+  if (e.target.classList.contains('header-theme-icon')) {
+    const theme = e.target.dataset.theme === 'light' ? 'dark' : 'light'
+    setLocalStorage('theme', theme)
+    changeTheme(theme)
   }
 })
