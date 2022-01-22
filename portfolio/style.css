@@ -243,6 +243,40 @@ button {
   color: var(--color-gold);
 }
 
+.header-theme {
+  width: 45px;
+  height: 45px;
+  margin-right: 20px;
+  order: 1;
+}
+
+.header-theme-icon {
+  background-size: contain;
+  background-repeat: no-repeat;
+  transition: 0.3s;
+  display: none;
+  width: 45px;
+  height: 45px;
+}
+
+.header-theme-icon.active {
+  display: block;
+}
+
+.header-theme-icon:hover {
+  cursor: pointer;
+  filter: invert(26%) sepia(15%) saturate(638%) hue-rotate(7deg) brightness(92%)
+    contrast(87%);
+}
+
+[data-theme='dark'] {
+  background-image: url('assets/svg/theme/moon.svg');
+}
+
+[data-theme='light'] {
+  background-image: url('assets/svg/theme/sun.svg');
+}
+
 /* Main */
 
 /* Hero */
