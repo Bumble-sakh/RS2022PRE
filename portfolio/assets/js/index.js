@@ -45,10 +45,12 @@ console.groupEnd()
 /* Global variables */
 import text from './translate.js'
 
-let language = 'en'
+let settings = getLocalStorage()
 
 const lngToggle = document.querySelector('.header-language')
 const textsList = document.querySelectorAll('[data-text]')
+const portfolioNav = document.querySelector('.portfolio-nav')
+const portfolioPictures = document.querySelector('.portfolio-pictures')
 
 /* Global functions */
 
@@ -57,14 +59,35 @@ function setLocalStorage(variable, value) {
 }
 
 function getLocalStorage() {
-  if (localStorage.getItem('language')) {
-    language = localStorage.getItem('language')
-    const lngBtn = document.querySelector(`[data-language='${language}']`)
-    lngBtn.classList.add('language-active')
-    translateText(language)
+  const language = localStorage.getItem('language') || 'en'
+  const seasons = localStorage.getItem('seasons') || [
+    'winter',
+    'spring',
+    'summer',
+    'autumn',
+  ]
+  const season = localStorage.getItem('season') || 'winter'
+  const theme = localStorage.getItem('theme') || 'dark'
+
+  return {
+    language: language,
+    seasons: seasons,
+    season: season,
+    theme: theme,
   }
 }
 
+function picPreloader(seasons) {
+  let count = 0
+  seasons.forEach((season) => {
+    for (let i = 1; i <= 6; i++) {
+      const pic = new Image()
+      pic.src = `./assets/img/portfolio/${season}/${i}.jpg`
+      count++
+    }
+  })
+  console.info(`${count} images preloaded`)
+}
 function translateText(lng) {
   textsList.forEach((item) => {
     const data = item.dataset.text
@@ -72,9 +95,50 @@ function translateText(lng) {
   })
 }
 
+function seasonActivate(target) {
+  const season = target.dataset.season
+
+  for (const child of portfolioNav.children) {
+    target.classList.add('portfolio-nav-button-active')
+    if (child.classList.contains('portfolio-nav-button-active')) {
+      child.classList.remove('portfolio-nav-button-active')
+    }
+  }
+  target.classList.add('portfolio-nav-button-active')
+
+  for (let i = 0; i < portfolioPictures.children.length; i++) {
+    const pic = portfolioPictures.children[i]
+    pic.src = `assets/img/portfolio/${season}/${i + 1}.jpg`
+    pic.alt = `${season}-photo-${i + 1}`
+  }
+  setLocalStorage('season', season)
+}
+
+function initial() {
+  // Language
+  const lngBtn = document.querySelector(
+    `[data-language='${settings.language}']`
+  )
+  lngBtn.classList.add('language-active')
+  translateText(settings.language)
+
+  // Season
+  const sAB = document.querySelector(`[data-season="${settings.season}"]`)
+  seasonActivate(sAB)
+
+  // Theme
+
+  // Preloader
+  picPreloader(settings.seasons)
+}
+
+/* Initial */
+
+initial()
+
 /* Global listener */
 
-window.addEventListener('load', getLocalStorage)
+// window.addEventListener('load', getLocalStorage)
 
 /* Burger */
 
@@ -99,40 +163,9 @@ menuLinks.forEach((link) => {
 })
 
 /* Portfolio images */
-const seasons = ['winter', 'spring', 'summer', 'autumn']
-
-;(function (seasons) {
-  let count = 0
-  seasons.forEach((season) => {
-    for (let i = 1; i <= 6; i++) {
-      const pic = new Image()
-      pic.src = `./assets/img/portfolio/${season}/${i}.jpg`
-      count++
-    }
-  })
-  console.info(`${count} images preloaded`)
-})(seasons)
-
-const portfolioNav = document.querySelector('.portfolio-nav')
-const portfolioPictures = document.querySelector('.portfolio-pictures')
-
 portfolioNav.addEventListener('click', (e) => {
   if (e.target.classList.contains('portfolio-nav-button')) {
-    const season = e.target.dataset.season
-
-    for (const child of portfolioNav.children) {
-      e.target.classList.add('portfolio-nav-button-active')
-      if (child.classList.contains('portfolio-nav-button-active')) {
-        child.classList.remove('portfolio-nav-button-active')
-      }
-    }
-    e.target.classList.add('portfolio-nav-button-active')
-
-    for (let i = 0; i < portfolioPictures.children.length; i++) {
-      const pic = portfolioPictures.children[i]
-      pic.src = `assets/img/portfolio/${season}/${i + 1}.jpg`
-      pic.alt = `${season}-photo-${i + 1}`
-    }
+    seasonActivate(e.target)
   }
 })
 
@@ -144,7 +177,7 @@ lngToggle.addEventListener('click', (e) => {
 
     if (e.target !== lngActive) {
       const lng = e.target.dataset.language
-      language = lng
+      settings.language = lng
       lngActive.classList.remove('language-active')
       e.target.classList.add('language-active')
 
@@ -152,7 +185,7 @@ lngToggle.addEventListener('click', (e) => {
       translateText(lng)
 
       /* local storage */
-      setLocalStorage('language', language)
+      setLocalStorage('language', settings.language)
     }
   }
 })
