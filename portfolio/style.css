@@ -21,6 +21,29 @@
   --color-black: #000000;
   --color-white: #ffffff;
   --color-gold: #bdae82;
+  --section-title: #bdae82;
+
+  --icon-filter: invert(0%) sepia(100%) saturate(18%) hue-rotate(239deg)
+    brightness(106%) contrast(100%);
+  --icon-filter-hover: invert(26%) sepia(15%) saturate(638%) hue-rotate(7deg)
+    brightness(92%) contrast(87%);
+  --hero-bg: url('assets/img/bg.jpg');
+
+  --button-bg: #bdae82;
+  --button-bg-hover: #bdae82;
+  --button-text: #ffffff;
+  --button-text-hover: #000000;
+
+  --portfolio-button-bg: #bdae82;
+  --portfolio-button-text: #000000;
+  --portfolio-button-text-hover: #ffffff;
+
+  --portfolio-active-bg: #000000;
+  --portfolio-active-text: #bdae82;
+
+  --contacts-bg: url('assets/img/contacts.jpg');
+  --contacts-form-bg: rgba(0, 0, 0, 0.5);
+  --contacts-text: #bdae82;
 }
 
 html {
@@ -28,7 +51,27 @@ html {
 }
 
 body {
-  background-color: #000000;
+  background-color: var(--color-black);
+}
+
+.light-theme {
+  --color-black: #ffffff;
+  --color-white: #000000;
+  --section-title: #000000;
+
+  --icon-filter: invert(100%) sepia(0%) saturate(7489%) hue-rotate(15deg)
+    brightness(112%) contrast(104%);
+
+  --hero-bg: url('assets/img/bg-light.jpg');
+
+  --button-bg: #ffffff;
+  --button-text: #000000;
+  --button-bg-hover: #000000;
+  --button-text-hover: #bdae82;
+
+  --contacts-bg: url('assets/img/contacts-light.jpg');
+  --contacts-form-bg: rgba(255, 255, 255, 0.5);
+  --contacts-text: #000000;
 }
 
 a {
@@ -68,7 +111,7 @@ button {
   margin: 0 auto;
   text-align: center;
   font: var(--font-h2);
-  color: var(--color-gold);
+  color: var(--section-title);
   background-color: var(--color-black);
 }
 
@@ -83,7 +126,7 @@ button {
   position: relative;
   top: 25px;
   margin: 0 auto;
-  background-color: var(--color-gold);
+  background-color: var(--section-title);
   width: 700px;
   height: 2px;
 }
@@ -91,7 +134,7 @@ button {
 /* Header */
 
 .header-container {
-  background: url('assets/img/bg.jpg');
+  background: var(--hero-bg);
   background-repeat: no-repeat;
   background-position: center 0;
   display: flex;
@@ -112,6 +155,7 @@ button {
   display: block;
   width: 50px;
   height: 50px;
+  filter: var(--icon-filter);
 }
 
 .logo:hover {
@@ -265,16 +309,17 @@ button {
 
 .header-theme-icon:hover {
   cursor: pointer;
-  filter: invert(26%) sepia(15%) saturate(638%) hue-rotate(7deg) brightness(92%)
-    contrast(87%);
+  filter: var(--icon-filter-hover);
 }
 
 [data-theme='dark'] {
-  background-image: url('assets/svg/theme/moon.svg');
+  background-image: url('assets/svg/theme/sun.svg');
+  filter: var(--icon-filter);
 }
 
 [data-theme='light'] {
-  background-image: url('assets/svg/theme/sun.svg');
+  background-image: url('assets/svg/theme/moon.svg');
+  filter: var(--icon-filter);
 }
 
 /* Main */
@@ -282,7 +327,7 @@ button {
 /* Hero */
 
 .hero-container {
-  background-image: url('assets/img/bg.jpg');
+  background-image: var(--hero-bg);
   background-position: center -90px;
   background-repeat: no-repeat;
   height: 910px;
@@ -311,12 +356,13 @@ button {
 .hero-btn {
   margin-top: 25px;
   font: var(--font-normal);
-  color: var(--color-black);
-  background-color: var(--color-gold);
+  color: var(--button-text);
+  background-color: var(--button-bg);
 }
 
 .hero-btn:hover {
-  color: var(--color-white);
+  color: var(--button-text-hover);
+  background-color: var(--button-bg-hover);
 }
 
 /* Skills */
@@ -399,20 +445,20 @@ button {
 
 .portfolio-nav-button {
   font: var(--font-normal);
-  color: var(--color-gold);
-  background-color: var(--color-black);
+  color: var(--portfolio-button-text);
+  background-color: var(--portfolio-button-bg);
   border: 1px solid var(--color-gold);
 }
 
 .portfolio-nav-button:not(.portfolio-nav-button-active):hover {
-  color: var(--color-white);
+  color: var(--portfolio-button-text-hover);
 }
 
 .portfolio-nav-button-active {
   cursor: auto;
   font: var(--font-normal);
-  color: var(--color-black);
-  background-color: var(--color-gold);
+  color: var(--portfolio-active-text);
+  background-color: var(--portfolio-active-bg);
   border: 1px solid var(--color-gold);
 }
 
@@ -518,13 +564,13 @@ button {
 }
 
 .price-card-btn:hover {
-  color: var(--color-white);
+  color: var(--portfolio-button-text-hover);
 }
 
 /* Contacts */
 
 .contacts {
-  background-image: url('assets/img/contacts.jpg');
+  background-image: var(--contacts-bg);
   /* background-repeat: no-repeat;
   background-size: auto 700px;
   background-position: center center; */
@@ -549,9 +595,9 @@ button {
 .contacts-form textarea {
   box-sizing: border-box;
   border: 2px solid var(--color-gold);
-  background: rgba(0, 0, 0, 0.5);
+  background: var(--contacts-form-bg);
   font: var(--font-normal);
-  color: var(--color-gold);
+  color: var(--contacts-text);
   padding: 0;
   padding-left: 18px;
   height: 50px;
@@ -566,7 +612,7 @@ button {
 .contacts-form input::placeholder,
 .contacts-form textarea::placeholder {
   font: var(--font-normal);
-  color: var(--color-gold);
+  color: var(--contacts-text);
 }
 
 .contacts-form input:focus-visible,
@@ -577,12 +623,13 @@ button {
 .contacts-form button {
   margin-top: 10px;
   font: var(--font-normal);
-  color: var(--color-black);
-  background-color: var(--color-gold);
+  color: var(--button-text);
+  background-color: var(--button-bg);
 }
 
 .contacts-form button:hover {
-  color: var(--color-white);
+  color: var(--button-text-hover);
+  background-color: var(--button-bg-hover);
 }
 
 .contacts-container .section-title {
@@ -631,25 +678,29 @@ button {
   height: 32px;
 }
 
-.social-link:hover {
-  filter: invert(26%) sepia(15%) saturate(638%) hue-rotate(7deg) brightness(92%)
-    contrast(87%);
-}
-
 .social-link.instagram {
   background-image: url('assets/svg/social/inst.svg');
+  filter: var(--icon-filter);
 }
 
 .social-link.facebook {
   background-image: url('assets/svg/social/fb.svg');
+  filter: var(--icon-filter);
 }
 
 .social-link.twitter {
   background-image: url('assets/svg/social/tw.svg');
+  filter: var(--icon-filter);
 }
 
 .social-link.printerest {
   background-image: url('assets/svg/social/pinterest.svg');
+  filter: var(--icon-filter);
+}
+
+.social-link:hover {
+  filter: invert(26%) sepia(15%) saturate(638%) hue-rotate(7deg) brightness(92%)
+    contrast(87%);
 }
 
 /* Media queries */
