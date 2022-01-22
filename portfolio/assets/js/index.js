@@ -72,7 +72,7 @@ function translateText(lng) {
   })
 }
 
-/* Global lisener */
+/* Global listener */
 
 window.addEventListener('load', getLocalStorage)
 
@@ -84,10 +84,12 @@ const menuLinks = document.querySelectorAll('.header-nav-menu-link')
 const fade = document.querySelector('.fade')
 
 const burgerMenuToggle = (e) => {
-  menu.classList.toggle('closed')
-  menu.classList.toggle('opened')
-  burgerBtn.classList.toggle('opened')
-  fade.classList.toggle('hide')
+  if (window.innerWidth <= 768) {
+    menu.classList.toggle('closed')
+    menu.classList.toggle('opened')
+    burgerBtn.classList.toggle('opened')
+    fade.classList.toggle('hide')
+  }
 }
 
 burgerBtn.addEventListener('click', burgerMenuToggle)
