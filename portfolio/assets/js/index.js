@@ -88,6 +88,7 @@ function picPreloader(seasons) {
   })
   console.info(`${count} images preloaded`)
 }
+
 function translateText(lng) {
   textsList.forEach((item) => {
     const data = item.dataset.text
