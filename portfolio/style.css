@@ -43,6 +43,10 @@
   --contacts-bg: url('assets/img/contacts.jpg');
   --contacts-form-bg: rgba(0, 0, 0, 0.5);
   --contacts-text: #bdae82;
+
+  --btn-anim-hover-wg: #ffffff;
+  --btn-anim-hover: #bdae82;
+  --btn-anim-hover: #bdae82;
 }
 
 html {
@@ -71,6 +75,8 @@ body {
   --contacts-bg: url('assets/img/contacts-light.jpg');
   --contacts-form-bg: rgba(255, 255, 255, 0.5);
   --contacts-text: #000000;
+
+  --btn-anim-hover-wg: #bdae82;
 }
 
 a {
@@ -93,8 +99,40 @@ button {
 }
 
 .btn:not(.portfolio-nav-button-active):active {
-  transform: scale(0.9);
+  text-align: center;
+  font-size: 1.3em;
+  font-weight: 700;
+  text-transform: uppercase;
+  animation: blur 0.75s ease-out infinite;
+  text-shadow: 0px 0px 5px #fff, 0px 0px 7px #fff;
 }
+
+.btn:hover:active {
+  color: var(--btn-anim-hover-wg);
+}
+
+.portfolio-nav-button:hover:active {
+  color: var(--portfolio-button-text-hover);
+}
+
+.price-card-btn:hover:active {
+  color: var(--portfolio-button-text-hover);
+}
+
+@keyframes blur {
+  from {
+    text-shadow: 0px 0px 10px #fff, 0px 0px 10px #fff, 0px 0px 25px #fff,
+      0px 0px 25px #fff, 0px 0px 25px #fff, 0px 0px 25px #fff, 0px 0px 25px #fff,
+      0px 0px 25px #fff, 0px 0px 50px #fff, 0px 0px 50px #fff,
+      0px 0px 50px #7b96b8, 0px 0px 150px #7b96b8, 0px 10px 100px #7b96b8,
+      0px 10px 100px #7b96b8, 0px 10px 100px #7b96b8, 0px 10px 100px #7b96b8,
+      0px -10px 100px #7b96b8, 0px -10px 100px #7b96b8;
+  }
+}
+
+/* .btn:not(.portfolio-nav-button-active):active {
+  transform: scale(0.9);
+} */
 
 .container {
   max-width: 1440px;
