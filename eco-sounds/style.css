@@ -1,6 +1,16 @@
+/* Fonts */
+
+@font-face {
+  font-family: Ubuntu;
+  src: url(assets/fonts/Ubuntu-Regular.ttf);
+}
+
 /* Variables */
 
 :root {
+  font-size: 16px;
+  --text-font: normal 1rem Ubuntu, sans-serif;
+
   --white-color: #ffffff;
   --text-color: #f1f3f1;
   --body-color: #162716;
@@ -18,4 +28,5 @@ body {
   height: 100%;
   margin: 0;
   padding: 0;
+  font: var(--text-font);
 }
