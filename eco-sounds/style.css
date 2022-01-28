@@ -1,0 +1,21 @@
+/* Variables */
+
+:root {
+  --white-color: #ffffff;
+  --text-color: #f1f3f1;
+  --body-color: #162716;
+  --footer-color: #011b0e;
+  --main-color: #57e059;
+  --hover-color: #43cb45;
+  --link-hover: #b6fcb7;
+  --container-color: #1d351d;
+}
+
+/* Elements */
+
+html,
+body {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+}
