@@ -146,12 +146,12 @@ body {
   margin-top: auto;
   margin-bottom: auto;
   opacity: 0;
-  transition: 10s;
+  transition: opacity 10s, filter 0.5s;
 }
 
 .main___slider__btn:hover {
   opacity: 100;
-  transition: 0.3s;
+  transition: 0.5s;
 }
 
 /* Footer */
