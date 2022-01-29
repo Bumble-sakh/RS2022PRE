@@ -20,9 +20,13 @@
           <a href="#" class="logo"></a>
         </div>
         <div class="header-language">
-          <span class="language en language-active" id="language-en">en</span>
+          <span class="language" data-language="en">en</span>
           <span>/</span>
-          <span class="language ru" id="language-ru">ru</span>
+          <span class="language" data-language="ru">ru</span>
+        </div>
+        <div class="header-theme">
+          <span class="header-theme-icon" data-theme="dark"></span>
+          <span class="header-theme-icon" data-theme="light"></span>
         </div>
         <nav class="header-nav">
           <div class="burger">
@@ -33,19 +37,39 @@
           <div class="header-nav-menu closed">
             <ul class="">
               <li class="header-nav-menu-item">
-                <a href="#skills" class="header-nav-menu-link">Skills</a>
+                <a
+                  href="#skills"
+                  class="header-nav-menu-link"
+                  data-text="skills"
+                ></a>
               </li>
               <li class="header-nav-menu-item">
-                <a href="#portfolio" class="header-nav-menu-link">Portfolio</a>
+                <a
+                  href="#portfolio"
+                  class="header-nav-menu-link"
+                  data-text="portfolio"
+                ></a>
               </li>
               <li class="header-nav-menu-item">
-                <a href="#video" class="header-nav-menu-link">Video</a>
+                <a
+                  href="#video"
+                  class="header-nav-menu-link"
+                  data-text="video"
+                ></a>
               </li>
               <li class="header-nav-menu-item">
-                <a href="#price" class="header-nav-menu-link">Price</a>
+                <a
+                  href="#price"
+                  class="header-nav-menu-link"
+                  data-text="price"
+                ></a>
               </li>
               <li class="header-nav-menu-item">
-                <a href="#contacts" class="header-nav-menu-link">Contacts</a>
+                <a
+                  href="#contacts"
+                  class="header-nav-menu-link"
+                  data-text="contacts"
+                ></a>
               </li>
             </ul>
           </div>
@@ -56,87 +80,92 @@
       <div class="container">
         <section class="section hero-container" id="hero">
           <div class="hero">
-            <h1 class="hero-title">Alexa Rise</h1>
-            <p class="hero-text">
-              Save sincere emotions, romantic feelings and happy moments of life
-              together with professional photographer Alexa Rise
-            </p>
-            <button class="hero-btn">Hire me</button>
+            <h1 class="hero-title" data-text="hero-title"></h1>
+            <p class="hero-text" data-text="hero-text"></p>
+            <button class="hero-btn btn" data-text="hire"></button>
           </div>
         </section>
         <section class="section skills" id="skills">
           <div class="section-title-container">
-            <h2 class="section-title">Skills</h2>
+            <h2 class="section-title" data-text="skills"></h2>
           </div>
           <div class="skills-items">
             <div class="skill-item">
-              <div class="skills-item-title">Digital photography</div>
-              <div class="skills-item-subtitle">
-                High-quality photos in the studio and on the nature
-              </div>
+              <div class="skills-item-title" data-text="skill-title-1"></div>
+              <div class="skills-item-subtitle" data-text="skill-text-1"></div>
             </div>
             <div class="skill-item">
-              <div class="skills-item-title">Video shooting</div>
-              <div class="skills-item-subtitle">
-                Capture your moments so that they always stay with you
-              </div>
+              <div class="skills-item-title" data-text="skill-title-2"></div>
+              <div class="skills-item-subtitle" data-text="skill-text-2"></div>
             </div>
             <div class="skill-item">
-              <div class="skills-item-title">Retouch</div>
-              <div class="skills-item-subtitle">
-                I strive to make photography surpass reality
-              </div>
+              <div class="skills-item-title" data-text="skill-title-3"></div>
+              <div class="skills-item-subtitle" data-text="skill-text-3"></div>
             </div>
             <div class="skill-item">
-              <div class="skills-item-title">Audio</div>
-              <div class="skills-item-subtitle">
-                Professional sounds recording for video, advertising, portfolio
+              <div class="skills-item-title" data-text="skill-title-4">
+                Audio
               </div>
+              <div class="skills-item-subtitle" data-text="skill-text-4"></div>
             </div>
           </div>
         </section>
         <section class="section portfolio" id="portfolio">
           <div class="section-title-container">
-            <h2 class="section-title">Portfolio</h2>
+            <h2 class="section-title" data-text="portfolio"></h2>
           </div>
           <div class="portfolio-nav">
-            <button class="portfolio-nav-button">Winter</button>
-            <button class="portfolio-nav-button">Spring</button>
-            <button class="portfolio-nav-button">Summer</button>
-            <button class="portfolio-nav-button portfolio-nav-button-active">
-              Autumn
-            </button>
+            <button
+              class="portfolio-nav-button btn"
+              data-season="winter"
+              data-text="winter"
+            ></button>
+            <button
+              class="portfolio-nav-button btn"
+              data-season="spring"
+              data-text="spring"
+            ></button>
+            <button
+              class="portfolio-nav-button btn"
+              data-season="summer"
+              data-text="summer"
+            ></button>
+            <button
+              class="portfolio-nav-button portfolio-nav-button-active btn"
+              data-season="autumn"
+              data-text="autumn"
+            ></button>
           </div>
           <div class="portfolio-pictures">
             <img
-              src="assets/img/portfolio/autumn/portfolio-img-01.jpg"
+              src="assets/img/portfolio/autumn/1.jpg"
               alt="autumn-photo-01"
             />
             <img
-              src="assets/img/portfolio/autumn/portfolio-img-02.jpg"
+              src="assets/img/portfolio/autumn/2.jpg"
               alt="autumn-photo-02"
             />
             <img
-              src="assets/img/portfolio/autumn/portfolio-img-03.jpg"
+              src="assets/img/portfolio/autumn/3.jpg"
               alt="autumn-photo-03"
             />
             <img
-              src="assets/img/portfolio/autumn/portfolio-img-04.jpg"
+              src="assets/img/portfolio/autumn/4.jpg"
               alt="autumn-photo-04"
             />
             <img
-              src="assets/img/portfolio/autumn/portfolio-img-05.jpg"
+              src="assets/img/portfolio/autumn/5.jpg"
               alt="autumn-photo-05"
             />
             <img
-              src="assets/img/portfolio/autumn/portfolio-img-06.jpg"
+              src="assets/img/portfolio/autumn/6.jpg"
               alt="autumn-photo-06"
             />
           </div>
         </section>
         <section class="section video" id="video">
           <div class="section-title-container">
-            <h2 class="section-title">Video</h2>
+            <h2 class="section-title" data-text="video"></h2>
           </div>
           <div class="video-player">
             <button class="video-play-btn"></button>
@@ -144,48 +173,89 @@
         </section>
         <section class="section price" id="price">
           <div class="section-title-container">
-            <h2 class="section-title">Price</h2>
+            <h2 class="section-title" data-text="price"></h2>
           </div>
           <div class="price-cards">
             <div class="price-card">
               <h3 class="price-card-title">Standard</h3>
               <h4 class="price-card-amount">500 $</h4>
-              <span class="price-card-description">One location</span>
-              <span class="price-card-description">120 photos in color</span>
-              <span class="price-card-description">12 photos in retouch</span>
-              <span class="price-card-description">Readiness 2-3 weeks</span>
-              <span class="price-card-description">Make up, visage</span>
-              <button class="price-card-btn">Order shooting</button>
+              <span
+                class="price-card-description"
+                data-text="price-description-1-span-1"
+              ></span>
+              <span
+                class="price-card-description"
+                data-text="price-description-1-span-2"
+              ></span>
+              <span
+                class="price-card-description"
+                data-text="price-description-1-span-3"
+              ></span>
+              <span
+                class="price-card-description"
+                data-text="price-description-1-span-4"
+              ></span>
+              <span
+                class="price-card-description"
+                data-text="price-description-1-span-5"
+              ></span>
+              <button class="price-card-btn btn" data-text="order"></button>
             </div>
             <div class="price-card">
               <h3 class="price-card-title">Premium</h3>
               <h4 class="price-card-amount">700 $</h4>
-              <span class="price-card-description">One or two locations</span>
-              <span class="price-card-description">200 photos in color</span>
-              <span class="price-card-description">20 photos in retouch</span>
-              <span class="price-card-description">Readiness 1-2 weeks</span>
-              <span class="price-card-description">Make up, visage</span>
-              <button class="price-card-btn">Order shooting</button>
+              <span
+                class="price-card-description"
+                data-text="price-description-2-span-1"
+              ></span>
+              <span
+                class="price-card-description"
+                data-text="price-description-2-span-2"
+              ></span>
+              <span
+                class="price-card-description"
+                data-text="price-description-2-span-3"
+              ></span>
+              <span
+                class="price-card-description"
+                data-text="price-description-2-span-4"
+              ></span>
+              <span
+                class="price-card-description"
+                data-text="price-description-2-span-5"
+              ></span>
+              <button class="price-card-btn btn" data-text="order"></button>
             </div>
             <div class="price-card">
               <h3 class="price-card-title">Gold</h3>
               <h4 class="price-card-amount">1000 $</h4>
-              <span class="price-card-description"
-                >Three locations or more</span
-              >
-              <span class="price-card-description">300 photos in color</span>
-              <span class="price-card-description">50 photos in retouch</span>
-              <span class="price-card-description">Readiness 1 week</span>
-              <span class="price-card-description"
-                >Make up, visage, hairstyle</span
-              >
-              <button class="price-card-btn">Order shooting</button>
+              <span
+                class="price-card-description"
+                data-text="price-description-3-span-1"
+              ></span>
+              <span
+                class="price-card-description"
+                data-text="price-description-3-span-2"
+              ></span>
+              <span
+                class="price-card-description"
+                data-text="price-description-3-span-3"
+              ></span>
+              <span
+                class="price-card-description"
+                data-text="price-description-3-span-4"
+              ></span>
+              <span
+                class="price-card-description"
+                data-text="price-description-3-span-5"
+              ></span>
+              <button class="price-card-btn btn" data-text="order"></button>
             </div>
           </div>
         </section>
         <section class="section contacts" id="contacts">
           <div class="contacts-container">
-            <h2 class="section-title">Contact me</h2>
+            <h2 class="section-title" data-text="contact-me"></h2>
             <form action="#" method="post" class="contacts-form">
               <input
                 type="email"
@@ -199,7 +269,7 @@
                 id="message"
                 placeholder="Message"
               ></textarea>
-              <button>Send message</button>
+              <button class="btn" data-text="send-message"></button>
             </form>
           </div>
         </section>
@@ -242,6 +312,6 @@
         </div>
       </div>
     </footer>
-    <script src="index.js"></script>
+    <script type="module" src="assets/js/index.js"></script>
   </body>
 </html>
