@@ -47,9 +47,15 @@ function playSound(e) {
   if (audio[sound].paused) {
     audio[sound].play()
     e.target.classList.add('play')
+    isPlay = true
+    playBtn.classList.add('pause')
   } else {
     audio[sound].pause()
     e.target.classList.remove('play')
+    if (audio.every((sound) => sound.paused)) {
+      isPlay = false
+      playBtn.classList.remove('pause')
+    }
   }
 }
 
