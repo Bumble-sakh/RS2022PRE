@@ -122,12 +122,12 @@ body {
 
 .main___slider__prev-btn {
   -webkit-mask-image: url('assets/svg/left_arrow.svg');
-  padding-right: 1rem;
+  padding-right: 0.5rem;
 }
 
 .main___slider__next-btn {
   -webkit-mask-image: url('assets/svg/right_arrow.svg');
-  padding-left: 1rem;
+  padding-left: 0.5rem;
 }
 
 .main___slider__prev-btn:hover,
