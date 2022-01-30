@@ -39,8 +39,7 @@ body {
 }
 
 .link:hover {
-  filter: invert(68%) sepia(25%) saturate(1264%) hue-rotate(71deg)
-    brightness(93%) contrast(88%);
+  color: var(--main-color);
 }
 
 /* Wrapper */
@@ -53,7 +52,6 @@ body {
 .container {
   display: flex;
   flex-direction: row;
-  flex-wrap: wrap;
   justify-content: space-between;
   align-items: center;
   padding: 0 2rem;
@@ -67,12 +65,16 @@ body {
 }
 
 .header__logo {
-  background-image: url(assets/svg/logo.svg);
-  background-size: contain;
-  background-repeat: no-repeat;
+  background-color: var(--text-color);
+  -webkit-mask-size: cover;
+  -webkit-mask-image: url('assets/svg/logo.svg');
   display: block;
   width: 2.5rem;
   height: 2.5rem;
+}
+
+.header__logo:hover {
+  background-color: var(--main-color);
 }
 
 .header__sounds-menu__item {
@@ -102,18 +104,27 @@ body {
 .main___slider__next-btn {
   width: 4rem;
   height: 4rem;
-  margin: auto 1rem;
+  margin: auto 0;
   background-size: contain;
   background-repeat: no-repeat;
   display: block;
+  background-color: var(--text-color);
+  -webkit-mask-size: cover;
 }
 
 .main___slider__prev-btn {
-  background-image: url(assets/svg/left_arrow.svg);
+  -webkit-mask-image: url('assets/svg/left_arrow.svg');
+  padding-right: 1rem;
 }
 
 .main___slider__next-btn {
-  background-image: url(assets/svg/right_arrow.svg);
+  -webkit-mask-image: url('assets/svg/right_arrow.svg');
+  padding-left: 1rem;
+}
+
+.main___slider__prev-btn:hover,
+.main___slider__next-btn:hover {
+  background-color: var(--main-color);
 }
 
 .main___slider__image {
@@ -130,7 +141,9 @@ body {
 }
 
 .main___slider__btn {
-  background-image: url(assets/svg/play.svg);
+  background-color: var(--text-color);
+  -webkit-mask-image: url('assets/svg/play.svg');
+  -webkit-mask-size: contain;
   width: 10rem;
   height: 10rem;
   background-size: contain;
@@ -145,13 +158,19 @@ body {
   margin-right: auto;
   margin-top: auto;
   margin-bottom: auto;
+}
+
+.main___slider__btn.pause {
+  -webkit-mask-image: url('assets/svg/pause.svg');
+  -webkit-mask-size: contain;
   opacity: 0;
-  transition: opacity 10s, filter 0.5s;
+  transition: background-color 1s, opacity 5s 2s;
 }
 
 .main___slider__btn:hover {
+  background-color: var(--main-color);
   opacity: 100;
-  transition: 0.5s;
+  transition: background-color 1s;
 }
 
 /* Footer */
