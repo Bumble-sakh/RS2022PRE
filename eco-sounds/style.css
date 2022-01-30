@@ -177,6 +177,27 @@ body {
 
 .footer {
   height: 10%;
-
   background-color: var(--footer-color);
+}
+
+/* Media */
+
+@media (max-width: 420px) {
+  .header.container {
+    padding: 1rem;
+  }
+
+  .header__sounds-menu.container {
+    padding: 0;
+  }
+
+  .header__sounds-menu__item {
+    padding: 0 0.5rem;
+  }
+
+  .footer.container {
+    flex-direction: column;
+    flex-wrap: nowrap;
+    padding: 0.5rem 1rem;
+  }
 }
