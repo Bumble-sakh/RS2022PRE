@@ -19,6 +19,46 @@ const themes = {
       Animals: 'night_forest_animals.mp3',
     },
   },
+  2: {
+    name: 'Lake',
+    path: 'lake',
+    bg: 'bg.jpg',
+    audio: {
+      Cicadas: 'lake_cicadas.mp3',
+      Birds: 'lake_birds.mp3',
+      Frogs: 'lake_frogs.mp3',
+    },
+  },
+  2: {
+    name: 'Sea',
+    path: 'sea',
+    bg: 'bg.jpg',
+    audio: {
+      Waves: 'sea_main.mp3',
+      ' Water splash': 'sea_close.mp3',
+      Seagulls: 'sea_seagulls.mp3',
+    },
+  },
+  3: {
+    name: 'Fireplace',
+    path: 'fireplace',
+    bg: 'bg.jpg',
+    audio: {
+      Rain: 'rain_main.mp3',
+      Thunder: 'fireplace_thunder.mp3',
+      Fire: 'fireplace_fire.mp3',
+    },
+  },
+  4: {
+    name: 'Cave',
+    path: 'cave',
+    bg: 'bg.jpg',
+    audio: {
+      Cave: 'cave_scary.mp3',
+      Drops: 'cave_main.mp3',
+      Torch: 'cave_torch.mp3',
+    },
+  },
 }
 
 const maxThemes = Object.keys(themes).length - 1
