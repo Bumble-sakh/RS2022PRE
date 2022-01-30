@@ -42,15 +42,28 @@ function initAudio() {
   }
 }
 
+function playSound(e) {
+  const sound = e.target.dataset.sound
+  if (audio[sound].paused) {
+    audio[sound].play()
+    e.target.classList.add('play')
+  } else {
+    audio[sound].pause()
+    e.target.classList.remove('play')
+  }
+}
+
 function playAudio() {
   if (isPlay) {
-    audio.forEach((sound) => {
+    audio.forEach((sound, index) => {
+      document.querySelector(`[data-sound="${index}"]`).classList.remove('play')
       sound.pause()
     })
     isPlay = false
     playBtn.classList.remove('pause')
   } else {
-    audio.forEach((sound) => {
+    audio.forEach((sound, index) => {
+      document.querySelector(`[data-sound="${index}"]`).classList.add('play')
       sound.play()
     })
     isPlay = true
@@ -85,13 +98,14 @@ next.addEventListener('click', (e) => {
   changeTheme(themeCounter)
 })
 
-const changeTheme = (themeCounter) => {
+function changeTheme(themeCounter = 0) {
   stopAudio()
   currentTheme = themes[themeCounter]
   const sounds = Object.keys(currentTheme.audio)
   image.src = `assets/themes/${currentTheme.path}/${currentTheme.bg}`
   for (let i = 0; i < soundsMenuItems.length; i++) {
     soundsMenuItems[i].textContent = sounds[i]
+    soundsMenuItems[i].addEventListener('click', playSound)
   }
   initAudio()
 }
@@ -99,3 +113,4 @@ const changeTheme = (themeCounter) => {
 /* Init */
 
 initAudio()
+changeTheme()

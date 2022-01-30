@@ -81,6 +81,14 @@ body {
   padding: 0 1rem;
 }
 
+.header__sounds-menu__item.play {
+  color: var(--hover-color);
+}
+
+.header__sounds-menu__item.play:hover {
+  color: var(--main-color);
+}
+
 /* Main */
 
 .main {
