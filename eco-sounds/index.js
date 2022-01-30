@@ -24,11 +24,56 @@ const themes = {
 const maxThemes = Object.keys(themes).length - 1
 let themeCounter = 0
 let currentTheme = themes[themeCounter]
+const audio = []
+let isPlay = false
+
+function initAudio() {
+  playBtn.classList.remove('pause')
+  audio.length = 0
+  const sounds = Object.keys(currentTheme.audio)
+  for (let i = 0; i < sounds.length; i++) {
+    audio.push(
+      new Audio(
+        `assets/themes/${currentTheme.path}/${currentTheme.audio[sounds[i]]}`
+      )
+    )
+    audio[i].currentTime = 0
+    audio[i].loop = true
+  }
+}
+
+function playAudio() {
+  if (isPlay) {
+    audio.forEach((sound) => {
+      sound.pause()
+    })
+    isPlay = false
+    playBtn.classList.remove('pause')
+  } else {
+    audio.forEach((sound) => {
+      sound.play()
+    })
+    isPlay = true
+    playBtn.classList.add('pause')
+  }
+}
+
+function stopAudio() {
+  audio.forEach((sound) => {
+    sound.pause()
+  })
+  isPlay = false
+}
 
 const soundsMenuItems = document.querySelectorAll('.header__sounds-menu__item')
 const prev = document.querySelector('.main___slider__prev-btn')
 const next = document.querySelector('.main___slider__next-btn')
 const image = document.querySelector('.image')
+const playBtn = document.querySelector('.main___slider__btn')
+
+playBtn.addEventListener('click', (e) => {
+  playAudio()
+})
 
 prev.addEventListener('click', (e) => {
   themeCounter = themeCounter > 0 ? themeCounter - 1 : maxThemes
@@ -41,11 +86,16 @@ next.addEventListener('click', (e) => {
 })
 
 const changeTheme = (themeCounter) => {
+  stopAudio()
   currentTheme = themes[themeCounter]
+  const sounds = Object.keys(currentTheme.audio)
   image.src = `assets/themes/${currentTheme.path}/${currentTheme.bg}`
-
-  const audio = Object.keys(currentTheme.audio)
   for (let i = 0; i < soundsMenuItems.length; i++) {
-    soundsMenuItems[i].textContent = audio[i]
+    soundsMenuItems[i].textContent = sounds[i]
   }
+  initAudio()
 }
+
+/* Init */
+
+initAudio()
