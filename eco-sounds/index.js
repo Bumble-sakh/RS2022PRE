@@ -61,6 +61,12 @@ const themes = {
   },
 }
 
+const soundsMenuItems = document.querySelectorAll('.header__sounds-menu__item')
+const prev = document.querySelector('.main___slider__prev-btn')
+const next = document.querySelector('.main___slider__next-btn')
+const image = document.querySelector('.image')
+const playBtn = document.querySelector('.main___slider__btn')
+
 const maxThemes = Object.keys(themes).length - 1
 let themeCounter = 0
 let currentTheme = themes[themeCounter]
@@ -124,12 +130,6 @@ function stopAudio() {
   isPlay = false
 }
 
-const soundsMenuItems = document.querySelectorAll('.header__sounds-menu__item')
-const prev = document.querySelector('.main___slider__prev-btn')
-const next = document.querySelector('.main___slider__next-btn')
-const image = document.querySelector('.image')
-const playBtn = document.querySelector('.main___slider__btn')
-
 playBtn.addEventListener('click', (e) => {
   playAudio()
 })
@@ -146,6 +146,7 @@ next.addEventListener('click', (e) => {
 
 function changeTheme(themeCounter = 0) {
   stopAudio()
+  soundsMenuItems.forEach((item) => item.classList.remove('play'))
   currentTheme = themes[themeCounter]
   const sounds = Object.keys(currentTheme.audio)
   image.src = `assets/themes/${currentTheme.path}/${currentTheme.bg}`
