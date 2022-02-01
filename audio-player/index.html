@@ -5,6 +5,10 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon" />
+    <link
+      rel="stylesheet"
+      href="https://unicons.iconscout.com/release/v4.0.0/css/line.css"
+    />
     <link rel="icon" href="favicon.ico" type="image/x-icon" />
     <link rel="stylesheet" href="style.css" />
     <title>Audio-player</title>
@@ -18,27 +22,47 @@
           <div class="main__controls__artist">Artist</div>
           <div class="main__controls__track">Track</div>
           <div class="main__controls__time-block">
-            <div class="main__controls__time__current-time">00:00</div>
-            <input type="range" name="" id="" />
+            <div class="main__controls__time-block__current-time">00:00</div>
+            <div class="main__controls__time-block__time-line">
+              <input type="range" name="" id="" class="time-line" />
+            </div>
+
             <div class="main__controls__time-block__end-time">12:21</div>
           </div>
+
           <div class="main__controls__buttons">
-            <div class="main__controls__buttons__prev"></div>
-            <div class="main__controls__buttons__play"></div>
-            <div class="main__controls__buttons__next"></div>
-          </div>
-          <div class="main__controls__volume">
-            <input type="range" name="" id="" />
+            <div class="main__controls__buttons__prev">
+              <button class="btn">
+                <i class="uil uil-step-backward-circle"></i>
+              </button>
+            </div>
+            <div class="main__controls__buttons__play">
+              <button class="btn"><i class="uil uil-play-circle"></i></button>
+            </div>
+            <div class="main__controls__buttons__next">
+              <button class="btn">
+                <i class="uil uil-skip-forward-circle"></i>
+              </button>
+            </div>
+            <div class="main__controls__volume">
+              <button class="btn volume-btn">
+                <i class="uil uil-volume-mute"></i>
+              </button>
+
+              <input type="range" name="" id="" / class="volume">
+            </div>
           </div>
         </div>
       </div>
       <div class="footer">
         <div class="footer__github">
-          <a href="https://github.com/bumble-sakh">Igor Asessorov</a>
+          <a href="https://github.com/bumble-sakh" class="link"
+            >Igor Asessorov</a
+          >
         </div>
         <div class="footer__year">&copy 2022</div>
         <div class="footer__cources">
-          <a href="https://rs.school/js-stage0/">RS School</a>
+          <a href="https://rs.school/js-stage0/" class="link">RS School</a>
         </div>
       </div>
     </div>
