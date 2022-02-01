@@ -44,7 +44,6 @@ input[type='range']::-webkit-slider-runnable-track {
   width: 100%;
   height: 8px;
   cursor: pointer;
-  animate: 0.2s;
   box-shadow: 1px 1px 1px #ededed;
   background: #adadad;
   border-radius: 5px;
@@ -68,7 +67,6 @@ input[type='range']::-moz-range-track {
   width: 100%;
   height: 8px;
   cursor: pointer;
-  animate: 0.2s;
   box-shadow: 1px 1px 1px #ededed;
   background: #adadad;
   border-radius: 5px;
@@ -87,7 +85,6 @@ input[type='range']::-ms-track {
   width: 100%;
   height: 8px;
   cursor: pointer;
-  animate: 0.2s;
   background: transparent;
   border-color: transparent;
   color: transparent;
@@ -163,10 +160,6 @@ input[type='range']:focus::-ms-fill-upper {
   box-sizing: border-box;
   width: calc(100% - 204px);
   padding: 8px;
-}
-
-.main__controls__artist,
-.main__controls__track {
 }
 
 .main__controls__time-block {
