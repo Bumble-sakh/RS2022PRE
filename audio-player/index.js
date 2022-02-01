@@ -40,16 +40,23 @@ class Player {
 
 const player = new Player(playlist)
 
-const playBtn = document.querySelector('.play-btn')
-playBtn.addEventListener('click', (e) => {
+const setPlayBtn = () => {
   if (player.isPlay) {
-    player.pause()
-    playBtn.classList.remove('uil-pause-circle')
-    playBtn.classList.add('uil-play-circle')
-  } else {
-    player.play()
-
     playBtn.classList.remove('uil-play-circle')
     playBtn.classList.add('uil-pause-circle')
+  } else {
+    playBtn.classList.remove('uil-pause-circle')
+    playBtn.classList.add('uil-play-circle')
   }
-})
+}
+
+const playBtn = document.querySelector('.play-btn')
+const switchPlay = () => {
+  if (player.isPlay) {
+    player.pause()
+  } else {
+    player.play()
+  }
+  setPlayBtn()
+}
+playBtn.addEventListener('click', switchPlay)
