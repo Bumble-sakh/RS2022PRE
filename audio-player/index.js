@@ -36,6 +36,35 @@ class Player {
   pause() {
     this.track.pause()
   }
+  setCurrentTrack() {
+    if (this.isPlay) {
+      this.pause()
+      this.track = new Audio(
+        `assets/playlist/${this.playlist[this.currentTrack].file}.mp3`
+      )
+      this.play()
+    } else {
+      this.track = new Audio(
+        `assets/playlist/${this.playlist[this.currentTrack].file}.mp3`
+      )
+    }
+  }
+  next() {
+    if (this.currentTrack < this.playlist.length - 1) {
+      this.currentTrack++
+    } else {
+      this.currentTrack = 0
+    }
+    this.setCurrentTrack()
+  }
+  prev() {
+    if (this.currentTrack > 0) {
+      this.currentTrack--
+    } else {
+      this.currentTrack = this.playlist.length - 1
+    }
+    this.setCurrentTrack()
+  }
 }
 
 const player = new Player(playlist)
@@ -60,3 +89,15 @@ const switchPlay = () => {
   setPlayBtn()
 }
 playBtn.addEventListener('click', switchPlay)
+
+const nextBtn = document.querySelector('.next-btn')
+nextBtn.addEventListener('click', (e) => {
+  player.next()
+  setPlayBtn()
+})
+
+const prevBtn = document.querySelector('.prev-btn')
+prevBtn.addEventListener('click', (e) => {
+  player.prev()
+  setPlayBtn()
+})
