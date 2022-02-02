@@ -27,15 +27,31 @@ class Player {
       `assets/playlist/${this.playlist[this.currentTrack].file}.mp3`
     )
   }
+
+  get cover() {
+    return this.playlist[this.currentTrack].cover
+  }
+
+  get artistName() {
+    return this.playlist[this.currentTrack].artist
+  }
+
+  get trackName() {
+    return this.playlist[this.currentTrack].track
+  }
+
   get isPlay() {
     return !this.track.paused
   }
+
   play() {
     this.track.play()
   }
+
   pause() {
     this.track.pause()
   }
+
   setCurrentTrack() {
     if (this.isPlay) {
       this.pause()
@@ -49,6 +65,7 @@ class Player {
       )
     }
   }
+
   next() {
     if (this.currentTrack < this.playlist.length - 1) {
       this.currentTrack++
@@ -57,6 +74,7 @@ class Player {
     }
     this.setCurrentTrack()
   }
+
   prev() {
     if (this.currentTrack > 0) {
       this.currentTrack--
@@ -68,6 +86,15 @@ class Player {
 }
 
 const player = new Player(playlist)
+
+const cover = document.querySelector('.main__img')
+const artist = document.querySelector('.main__controls__artist')
+const track = document.querySelector('.main__controls__track')
+const changeTrackInfo = () => {
+  cover.style['background-image'] = `url(assets/playlist/${player.cover}.jpg)`
+  artist.textContent = player.artistName
+  track.textContent = player.trackName
+}
 
 const setPlayBtn = () => {
   if (player.isPlay) {
@@ -94,10 +121,16 @@ const nextBtn = document.querySelector('.next-btn')
 nextBtn.addEventListener('click', (e) => {
   player.next()
   setPlayBtn()
+  changeTrackInfo()
 })
 
 const prevBtn = document.querySelector('.prev-btn')
 prevBtn.addEventListener('click', (e) => {
   player.prev()
   setPlayBtn()
+  changeTrackInfo()
 })
+
+/* Init */
+
+changeTrackInfo()
