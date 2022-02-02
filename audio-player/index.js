@@ -26,8 +26,8 @@ class Player {
     this.track = new Audio(
       `assets/playlist/${this.playlist[this.currentTrack].file}.mp3`
     )
-    this.track.volume = 1
     this.track.currentTime = 0
+    this.currentVolume = this.track.volume
   }
 
   get cover() {
@@ -56,6 +56,7 @@ class Player {
 
   set volume(volume) {
     this.track.volume = volume / 100
+    this.currentVolume = this.track.volume
   }
 
   set currentTime(time) {
@@ -90,6 +91,7 @@ class Player {
         `assets/playlist/${this.playlist[this.currentTrack].file}.mp3`
       )
     }
+    this.track.volume = this.currentVolume
   }
 
   next() {
@@ -137,6 +139,15 @@ const timeTemplate = (time) => {
   return out
 }
 
+const timeUpdate = () => {
+  player.track.addEventListener('timeupdate', () => {
+    const time = Math.floor(player.track.currentTime)
+    currentTimeLabel.textContent = timeTemplate(time)
+    console.log(time)
+    timeLine.value = time
+  })
+}
+
 const changeDuration = () => {
   player.track.addEventListener('loadedmetadata', () => {
     const duration = Math.ceil(player.trackDuration)
@@ -150,6 +161,7 @@ const changeTrackInfo = () => {
   artist.textContent = player.artistName
   track.textContent = player.trackName
   changeDuration()
+  timeUpdate()
 }
 
 const setPlayBtn = () => {
@@ -197,18 +209,6 @@ const switchMute = () => {
 
 /* Listeners */
 
-playBtn.addEventListener('click', switchPlay)
-
-volumeRange.addEventListener('change', setVolume)
-
-muteBtn.addEventListener('click', switchMute)
-
-player.track.addEventListener('timeupdate', () => {
-  const time = Math.floor(player.track.currentTime)
-  currentTimeLabel.textContent = timeTemplate(time)
-  timeLine.value = time
-})
-
 nextBtn.addEventListener('click', (e) => {
   player.next()
   setPlayBtn()
@@ -220,6 +220,12 @@ prevBtn.addEventListener('click', (e) => {
   setPlayBtn()
   changeTrackInfo()
 })
+
+playBtn.addEventListener('click', switchPlay)
+
+volumeRange.addEventListener('change', setVolume)
+
+muteBtn.addEventListener('click', switchMute)
 
 /* Init */
 
