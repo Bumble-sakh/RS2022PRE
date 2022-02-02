@@ -113,6 +113,8 @@ class Player {
   }
 }
 
+let isChanging = false
+
 /* UI */
 const cover = document.querySelector('.main__img')
 const artist = document.querySelector('.main__controls__artist')
@@ -132,6 +134,14 @@ const player = new Player(playlist)
 
 /* Functions */
 
+const trackEnded = () => {
+  player.next()
+  setPlayBtn()
+  changeTrackInfo()
+  switchPlay()
+  player.track.addEventListener('ended', trackEnded)
+}
+
 const timeTemplate = (time) => {
   const min = Math.trunc(time / 60).toString()
   const sec = Math.trunc(time % 60).toString()
@@ -141,10 +151,11 @@ const timeTemplate = (time) => {
 
 const timeUpdate = () => {
   player.track.addEventListener('timeupdate', () => {
-    const time = Math.floor(player.track.currentTime)
-    currentTimeLabel.textContent = timeTemplate(time)
-    console.log(time)
-    timeLine.value = time
+    if (!isChanging) {
+      const time = Math.floor(player.track.currentTime)
+      timeLine.value = time
+      currentTimeLabel.textContent = timeTemplate(time)
+    }
   })
 }
 
@@ -162,6 +173,8 @@ const changeTrackInfo = () => {
   track.textContent = player.trackName
   changeDuration()
   timeUpdate()
+  timeLine.value = 0
+  currentTimeLabel.textContent = timeTemplate(0)
 }
 
 const setPlayBtn = () => {
@@ -209,6 +222,8 @@ const switchMute = () => {
 
 /* Listeners */
 
+player.track.addEventListener('ended', trackEnded)
+
 nextBtn.addEventListener('click', (e) => {
   player.next()
   setPlayBtn()
@@ -219,6 +234,15 @@ prevBtn.addEventListener('click', (e) => {
   player.prev()
   setPlayBtn()
   changeTrackInfo()
+})
+
+timeLine.addEventListener('input', () => {
+  isChanging = true
+})
+
+timeLine.addEventListener('change', () => {
+  player.currentTime = timeLine.value
+  isChanging = false
 })
 
 playBtn.addEventListener('click', switchPlay)
