@@ -224,10 +224,10 @@ input[type='range']:focus::-ms-fill-upper {
   align-items: center;
 }
 
-.volume-btn {
+.mute-btn {
   font-size: 16px;
 }
-.volume-btn {
+.mute-btn {
   width: auto;
   margin: 0 5px;
 }
@@ -263,19 +263,19 @@ input[type='range']:focus::-ms-fill-upper {
     justify-content: center;
     flex-wrap: wrap;
   }
-  .btn:not(.volume-btn) {
+  .btn:not(.mute-btn) {
     font-size: 48px;
   }
 }
 
 @media (max-width: 400px) {
-  .btn:not(.volume-btn) {
+  .btn:not(.mute-btn) {
     font-size: 40px;
   }
 }
 
 @media (max-width: 350px) {
-  .btn:not(.volume-btn) {
+  .btn:not(.mute-btn) {
     font-size: 32px;
   }
 }

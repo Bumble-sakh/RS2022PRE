@@ -26,6 +26,7 @@ class Player {
     this.track = new Audio(
       `assets/playlist/${this.playlist[this.currentTrack].file}.mp3`
     )
+    this.track.volume = 1
   }
 
   get cover() {
@@ -42,6 +43,22 @@ class Player {
 
   get isPlay() {
     return !this.track.paused
+  }
+
+  get isMuted() {
+    return this.track.muted
+  }
+
+  set volume(volume) {
+    this.track.volume = volume / 100
+  }
+
+  mute() {
+    this.track.muted = true
+  }
+
+  unmute() {
+    this.track.muted = false
   }
 
   play() {
@@ -130,6 +147,34 @@ prevBtn.addEventListener('click', (e) => {
   setPlayBtn()
   changeTrackInfo()
 })
+
+const volumeRange = document.querySelector('.volume')
+const setVolume = (e) => {
+  const volume = e.target.value
+  player.volume = volume
+}
+volumeRange.addEventListener('change', setVolume)
+
+const muteBtn = document.querySelector('.mute')
+const setMuteBtn = () => {
+  if (player.isMuted) {
+    muteBtn.classList.remove('uil-volume-mute')
+    muteBtn.classList.add('uil-volume')
+  } else {
+    muteBtn.classList.remove('uil-volume')
+    muteBtn.classList.add('uil-volume-mute')
+  }
+}
+
+const switchMute = () => {
+  if (player.isMuted) {
+    player.unmute()
+  } else {
+    player.mute()
+  }
+  setMuteBtn()
+}
+muteBtn.addEventListener('click', switchMute)
 
 /* Init */
 
