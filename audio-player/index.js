@@ -27,6 +27,7 @@ class Player {
       `assets/playlist/${this.playlist[this.currentTrack].file}.mp3`
     )
     this.track.volume = 1
+    this.track.currentTime = 0
   }
 
   get cover() {
@@ -41,6 +42,10 @@ class Player {
     return this.playlist[this.currentTrack].track
   }
 
+  get trackDuration() {
+    return this.track.duration
+  }
+
   get isPlay() {
     return !this.track.paused
   }
@@ -51,6 +56,10 @@ class Player {
 
   set volume(volume) {
     this.track.volume = volume / 100
+  }
+
+  set currentTime(time) {
+    this.track.currentTime = time
   }
 
   mute() {
@@ -102,15 +111,45 @@ class Player {
   }
 }
 
-const player = new Player(playlist)
-
+/* UI */
 const cover = document.querySelector('.main__img')
 const artist = document.querySelector('.main__controls__artist')
 const track = document.querySelector('.main__controls__track')
+const currentTimeLabel = document.querySelector('.current-time')
+const durationLabel = document.querySelector('.duration')
+const timeLine = document.querySelector('.time-line')
+const playBtn = document.querySelector('.play-btn')
+const nextBtn = document.querySelector('.next-btn')
+const prevBtn = document.querySelector('.prev-btn')
+const volumeRange = document.querySelector('.volume')
+const muteBtn = document.querySelector('.mute')
+
+/* Player */
+
+const player = new Player(playlist)
+
+/* Functions */
+
+const timeTemplate = (time) => {
+  const min = Math.trunc(time / 60).toString()
+  const sec = Math.trunc(time % 60).toString()
+  const out = `${min.padStart(2, 0)}:${sec.padStart(2, 0)}`
+  return out
+}
+
+const changeDuration = () => {
+  player.track.addEventListener('loadedmetadata', () => {
+    const duration = Math.ceil(player.trackDuration)
+    durationLabel.textContent = timeTemplate(duration)
+    timeLine.max = duration
+  })
+}
+
 const changeTrackInfo = () => {
   cover.style['background-image'] = `url(assets/playlist/${player.cover}.jpg)`
   artist.textContent = player.artistName
   track.textContent = player.trackName
+  changeDuration()
 }
 
 const setPlayBtn = () => {
@@ -123,7 +162,6 @@ const setPlayBtn = () => {
   }
 }
 
-const playBtn = document.querySelector('.play-btn')
 const switchPlay = () => {
   if (player.isPlay) {
     player.pause()
@@ -132,30 +170,12 @@ const switchPlay = () => {
   }
   setPlayBtn()
 }
-playBtn.addEventListener('click', switchPlay)
 
-const nextBtn = document.querySelector('.next-btn')
-nextBtn.addEventListener('click', (e) => {
-  player.next()
-  setPlayBtn()
-  changeTrackInfo()
-})
-
-const prevBtn = document.querySelector('.prev-btn')
-prevBtn.addEventListener('click', (e) => {
-  player.prev()
-  setPlayBtn()
-  changeTrackInfo()
-})
-
-const volumeRange = document.querySelector('.volume')
 const setVolume = (e) => {
   const volume = e.target.value
   player.volume = volume
 }
-volumeRange.addEventListener('change', setVolume)
 
-const muteBtn = document.querySelector('.mute')
 const setMuteBtn = () => {
   if (player.isMuted) {
     muteBtn.classList.remove('uil-volume-mute')
@@ -174,7 +194,32 @@ const switchMute = () => {
   }
   setMuteBtn()
 }
+
+/* Listeners */
+
+playBtn.addEventListener('click', switchPlay)
+
+volumeRange.addEventListener('change', setVolume)
+
 muteBtn.addEventListener('click', switchMute)
+
+player.track.addEventListener('timeupdate', () => {
+  const time = Math.floor(player.track.currentTime)
+  currentTimeLabel.textContent = timeTemplate(time)
+  timeLine.value = time
+})
+
+nextBtn.addEventListener('click', (e) => {
+  player.next()
+  setPlayBtn()
+  changeTrackInfo()
+})
+
+prevBtn.addEventListener('click', (e) => {
+  player.prev()
+  setPlayBtn()
+  changeTrackInfo()
+})
 
 /* Init */
 
