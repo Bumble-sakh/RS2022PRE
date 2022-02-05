@@ -73,6 +73,14 @@ body {
   gap: 1rem;
   max-width: 50%;
   font: var(--quote-font);
+  border-radius: 10px;
+  padding: 10px;
+  transition: 0.5s;
+}
+
+.quote:hover {
+  cursor: pointer;
+  transform: scale(1.1);
 }
 
 .quote__img {
