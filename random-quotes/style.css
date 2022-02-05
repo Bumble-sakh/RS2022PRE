@@ -1,0 +1,122 @@
+@font-face {
+  font-family: 'ElMisseri';
+  src: url('fonts/ElMessiri.ttf');
+  font-weight: 100 1000;
+  font-stretch: 25% 151%;
+}
+
+@font-face {
+  font-family: 'Caveat';
+  src: url('fonts/Caveat.ttf');
+}
+
+:root {
+  font-size: 16px;
+  --main-font: 600 1rem ElMisseri;
+  --quote-font: 400 2rem Caveat;
+  --text-color: #000000;
+  --text-hover: #ff5a00;
+}
+
+html,
+body {
+  height: 100%;
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  font: var(--main-font);
+  font-size: 2rem;
+}
+
+.header {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  height: 4rem;
+  box-sizing: border-box;
+}
+
+.header__title {
+  font-size: 3rem;
+}
+
+.header__lng {
+  position: absolute;
+  top: 0;
+  right: 0;
+  height: 4rem;
+  margin-right: 10px;
+}
+
+.header__lng:hover {
+  cursor: pointer;
+  color: var(--text-hover);
+  transition: 0.5s;
+}
+
+.main {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: calc(100% - 8rem);
+}
+
+.quote {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 1rem;
+  max-width: 50%;
+  font: var(--quote-font);
+}
+
+.quote__img {
+  width: 30%;
+}
+
+.quote__img .img {
+  width: 100%;
+  object-fit: contain;
+  border-radius: 50%;
+}
+
+.quote__container {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+  width: 70%;
+  border: dotted #666 1px;
+  border-left: solid #ff5a00 10px;
+  padding: 10px;
+}
+
+.quote__container__text {
+  /* padding: 50px 20px; */
+}
+
+.quote__container__author {
+  text-align: end;
+  /* padding: 50px 20px; */
+}
+
+/* footer */
+
+.footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  height: 4rem;
+  box-sizing: border-box;
+  padding: 10px;
+}
+
+.footer .link {
+  color: var(--text-color);
+  text-decoration: none;
+}
+
+.footer .link:hover {
+  color: var(--text-hover);
+  transition: 0.5s;
+}
