@@ -199,6 +199,7 @@ const switchPlay = () => {
 const setVolume = (e) => {
   const volume = e.target.value
   player.volume = volume
+  player.unmute()
 }
 
 const setMuteBtn = () => {
