@@ -40,16 +40,12 @@ async function getQuote() {
   })
   const data = await res.json()
 
-  const text = document.querySelector('.quote__container__text')
-  const author = document.querySelector('.quote__container__author')
-  text.textContent = data.content
-  author.textContent = data.originator.name
+  return data
 }
 
 function getImg() {
   const file = rnd(1000, 1999)
-  const img = document.querySelector('.img')
-  img.src = `https://raw.githubusercontent.com/ozgrozer/100k-faces/master/docs/0/1/00${file}.jpg`
+  return `https://raw.githubusercontent.com/ozgrozer/100k-faces/master/docs/0/1/00${file}.jpg`
 }
 
 function toggleFavoritesIcon() {
@@ -62,9 +58,30 @@ function addFavorites() {
   // toggleFavoritesIcon()
 }
 
-async function quoteRendering() {
-  getQuote()
-  getImg()
+function quoteRendering() {
+  const quoteData = getQuote().then((data) => {
+    const quoteImg = getImg()
+    while (quote.firstChild) {
+      quote.removeChild(quote.firstChild)
+    }
+    quote.children
+    quote.insertAdjacentHTML(
+      'afterbegin',
+      `
+      <div class="quote__img">
+        <img
+          src="${quoteImg}"
+          alt="Random face"
+          class="img"
+        />
+      </div>
+      <div class="quote__container">
+        <div class="quote__container__text">${data.content}</div>
+        <div class="quote__container__author">${data.originator.name}</div>
+      </div>
+      `
+    )
+  })
 }
 
 /* listeners */
