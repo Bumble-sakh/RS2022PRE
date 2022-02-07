@@ -65,16 +65,15 @@ body {
 }
 
 .header__logo {
-  background-color: var(--text-color);
-  -webkit-mask-size: cover;
-  -webkit-mask-image: url('assets/svg/logo.svg');
+  fill: var(--text-color);
   display: block;
   width: 2.5rem;
   height: 2.5rem;
 }
 
 .header__logo:hover {
-  background-color: var(--main-color);
+  fill: var(--main-color);
+  transition: 0.5s;
 }
 
 .header__sounds-menu__item {
@@ -113,26 +112,26 @@ body {
   width: 4rem;
   height: 4rem;
   margin: auto 0;
-  background-size: contain;
-  background-repeat: no-repeat;
   display: block;
-  background-color: var(--text-color);
-  -webkit-mask-size: cover;
+  fill: var(--text-color);
 }
 
 .main___slider__prev-btn {
-  -webkit-mask-image: url('assets/svg/left_arrow.svg');
   padding-right: 0.5rem;
 }
 
 .main___slider__next-btn {
-  -webkit-mask-image: url('assets/svg/right_arrow.svg');
   padding-left: 0.5rem;
 }
 
 .main___slider__prev-btn:hover,
 .main___slider__next-btn:hover {
-  background-color: var(--main-color);
+  fill: var(--main-color);
+}
+
+.main___slider__prev-btn:active,
+.main___slider__next-btn:active {
+  transform: scale(0.8);
 }
 
 .main___slider__image {
@@ -149,13 +148,8 @@ body {
 }
 
 .main___slider__btn {
-  background-color: var(--text-color);
-  -webkit-mask-image: url('assets/svg/play.svg');
-  -webkit-mask-size: contain;
   width: 10rem;
   height: 10rem;
-  background-size: contain;
-  background-repeat: no-repeat;
   display: block;
   position: absolute;
   left: 0;
@@ -166,19 +160,43 @@ body {
   margin-right: auto;
   margin-top: auto;
   margin-bottom: auto;
+  fill: var(--text-color);
 }
 
 .main___slider__btn.pause {
-  -webkit-mask-image: url('assets/svg/pause.svg');
-  -webkit-mask-size: contain;
   opacity: 0;
-  transition: background-color 1s, opacity 5s 2s;
+  transition: fill 1s, opacity 5s 2s;
 }
 
 .main___slider__btn:hover {
-  background-color: var(--main-color);
+  fill: var(--main-color);
   opacity: 100;
-  transition: background-color 1s;
+  transition: fill 1s;
+}
+
+.main___slider__btn:active {
+  transform: scale(0.9);
+  transition: 0.5s;
+}
+
+.main___slider__btn .pauseLayer {
+  opacity: 0;
+  transition: 0.5s;
+}
+
+.main___slider__btn .playLayer {
+  opacity: 1;
+  transition: 0.5s;
+}
+
+.main___slider__btn.pause .pauseLayer {
+  opacity: 1;
+  transition: 0.5s;
+}
+
+.main___slider__btn.pause .playLayer {
+  opacity: 0;
+  transition: 0.5s;
 }
 
 /* Footer */
