@@ -200,6 +200,7 @@ const setVolume = (e) => {
   const volume = e.target.value
   player.volume = volume
   player.unmute()
+  setMuteBtn()
 }
 
 const setMuteBtn = () => {
