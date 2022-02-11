@@ -62,6 +62,7 @@ function renderImages({
   if (isQuery) {
     while (main.lastElementChild) {
       main.removeChild(main.lastElementChild)
+      window.scrollTo(0, 0)
     }
   }
 
@@ -83,17 +84,18 @@ function renderImages({
       <img src="${url}" alt="${alt}" />
       <div class="image__info">
         <div class="image__info__header">
-          <button class="image__info__header__favorites"  data-id="${imageId}">
+          <button class="image__info__header__favorites btn"  data-id="${imageId}">
             <i class="uil uil-plus"></i>
           </button>
         </div>
         <div class="image__info__footer">
           <div class="image__info__footer__author">${authorName}</div>
-          <button class="image__info__footer__download">
+          <button class="image__info__footer__download btn">
             <a
               download='download'
               href='${download}'
               target="_blank"
+              class="link"
               ><i class="uil uil-download-alt"></i
             ></a>
           </button>
