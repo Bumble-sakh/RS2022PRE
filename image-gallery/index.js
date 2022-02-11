@@ -10,6 +10,7 @@ const paginationPagesCount = 3
 const main = document.querySelector('.main')
 const searchInput = document.querySelector('.search__input')
 const searchBtn = document.querySelector('.search__button')
+const cancelButton = document.querySelector('.cancel__button')
 
 /* observers */
 
@@ -225,11 +226,25 @@ searchInput.addEventListener('keypress', (e) => {
   }
 })
 
+searchInput.addEventListener('input', () => {
+  if (searchInput.value) {
+    cancelButton.classList.remove('hidden')
+  } else {
+    cancelButton.classList.add('hidden')
+  }
+})
+
 searchBtn.addEventListener('click', (e) => {
-  e.preventDefault()
-  getPhoto()
+  if (searchInput.value) {
+    getPhoto()
+  }
+})
+
+cancelButton.addEventListener('click', () => {
+  searchInput.value = ''
+  cancelButton.classList.add('hidden')
 })
 
 /* init */
 
-getRandomPhoto().then(renderImages)
+// getRandomPhoto().then(renderImages)
