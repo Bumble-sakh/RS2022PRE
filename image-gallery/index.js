@@ -23,7 +23,7 @@ let observer = new IntersectionObserver(
     })
   },
   {
-    threshold: 0.3,
+    threshold: 0.9,
   }
 )
 
@@ -105,7 +105,104 @@ function renderImages({
 
   main.appendChild(container)
 
-  observer.observe(document.querySelector('.gallery:last-child'))
+  if (isQuery) {
+    renderPagination(currentPage, totalPages)
+  } else {
+    observer.observe(document.querySelector('.gallery:last-child'))
+  }
+}
+
+function renderPagination(currentPage, totalPages) {
+  if (totalPages < 2) return null
+  const isFirst = currentPage === 1 ? true : false
+  const isLast = currentPage === totalPages ? true : false
+  const pagesCount =
+    totalPages >= paginationPagesCount
+      ? totalPages - currentPage >= paginationPagesCount
+        ? paginationPagesCount
+        : totalPages - currentPage
+      : totalPages
+
+  const pagination = document.createElement('div')
+  pagination.classList.add('pagination')
+
+  if (!isFirst) {
+    const paginationFirst = renderPaginationButton(
+      'pagination__first',
+      'uil-angle-double-left',
+      1,
+      query
+    )
+
+    const paginationPrev = renderPaginationButton(
+      'pagination__prev',
+      'uil-angle-left',
+      currentPage - 1,
+      query
+    )
+
+    pagination.appendChild(paginationFirst)
+    pagination.appendChild(paginationPrev)
+  }
+
+  const paginationPages = document.createElement('div')
+  pagination.classList.add('pagination__pages')
+
+  for (let i = 1; i <= pagesCount; i++) {
+    const paginationPage = renderPaginationButton(
+      'pagination__page',
+      currentPage + i,
+      currentPage + i,
+      query
+    )
+    paginationPages.appendChild(paginationPage)
+  }
+
+  pagination.appendChild(paginationPages)
+
+  if (!isLast) {
+    const paginationNext = renderPaginationButton(
+      'pagination__next',
+      'uil-angle-right',
+      currentPage + 1,
+      query
+    )
+    pagination.appendChild(paginationNext)
+
+    const paginationLast = renderPaginationButton(
+      'pagination__last',
+      'uil-angle-double-right',
+      totalPages,
+      query
+    )
+    pagination.appendChild(paginationLast)
+  }
+
+  main.appendChild(pagination)
+}
+
+function renderPaginationButton(btnClass, btnIcon, page, query) {
+  isNum = typeof btnIcon === 'number' ? true : false
+  const button = document.createElement('button')
+  button.classList.add('btn')
+  button.classList.add(btnClass)
+
+  if (isNum) {
+    const buttonIcon = document.createElement('span')
+    buttonIcon.innerHTML = btnIcon
+    button.appendChild(buttonIcon)
+  } else {
+    const buttonIcon = document.createElement('i')
+    buttonIcon.classList.add('uil')
+    buttonIcon.classList.add(btnIcon)
+    button.appendChild(buttonIcon)
+  }
+
+  button.addEventListener('click', () => {
+    getQueryPhoto(query, page).then(renderImages)
+  })
+
+  return button
 }
 
 function getPhoto() {
