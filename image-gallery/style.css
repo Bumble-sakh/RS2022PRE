@@ -183,7 +183,7 @@ body::-webkit-scrollbar-thumb {
 .image__info {
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
+  justify-content: flex-end;
   position: absolute;
   top: 0;
   left: 0;
@@ -194,30 +194,22 @@ body::-webkit-scrollbar-thumb {
   transition: opacity 0.5s;
 }
 
-.image__info__header {
-  display: flex;
-  flex-direction: row;
-  justify-content: end;
-  margin: 10px;
-}
-
-.image__info__header .btn {
-  color: var(--text-info);
-}
-.image__info__header .btn:hover {
-  color: var(--main-color);
-  transition: 0.5s;
-}
-
 .image__info__footer {
   display: flex;
   flex-direction: row;
   justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
   margin: 10px;
 }
 
 .image__info__footer__author {
   color: var(--text-info);
+  font-size: 24px;
+}
+
+.image__info__footer__download {
+  margin-left: auto;
 }
 
 .image__info__footer .btn .link {
