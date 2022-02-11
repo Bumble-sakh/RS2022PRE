@@ -130,24 +130,26 @@ function renderPagination(currentPage, totalPages) {
   const pagination = document.createElement('div')
   pagination.classList.add('pagination')
 
-  if (!isFirst) {
-    const paginationFirst = renderPaginationButton(
-      'pagination__first',
-      'uil-angle-double-left',
-      1,
-      query
-    )
+  const paginationFirst = renderPaginationButton(
+    'pagination__first',
+    'uil-angle-double-left',
+    1,
+    query
+  )
+  const paginationPrev = renderPaginationButton(
+    'pagination__prev',
+    'uil-angle-left',
+    currentPage - 1,
+    query
+  )
 
-    const paginationPrev = renderPaginationButton(
-      'pagination__prev',
-      'uil-angle-left',
-      currentPage - 1,
-      query
-    )
-
-    pagination.appendChild(paginationFirst)
-    pagination.appendChild(paginationPrev)
+  if (isFirst) {
+    paginationFirst.classList.add('hidden')
+    paginationPrev.classList.add('hidden')
   }
+
+  pagination.appendChild(paginationFirst)
+  pagination.appendChild(paginationPrev)
 
   const paginationPages = document.createElement('div')
   pagination.classList.add('pagination__pages')
@@ -164,23 +166,26 @@ function renderPagination(currentPage, totalPages) {
 
   pagination.appendChild(paginationPages)
 
-  if (!isLast) {
-    const paginationNext = renderPaginationButton(
-      'pagination__next',
-      'uil-angle-right',
-      currentPage + 1,
-      query
-    )
-    pagination.appendChild(paginationNext)
+  const paginationNext = renderPaginationButton(
+    'pagination__next',
+    'uil-angle-right',
+    currentPage + 1,
+    query
+  )
 
-    const paginationLast = renderPaginationButton(
-      'pagination__last',
-      'uil-angle-double-right',
-      totalPages,
-      query
-    )
-    pagination.appendChild(paginationLast)
+  const paginationLast = renderPaginationButton(
+    'pagination__last',
+    'uil-angle-double-right',
+    totalPages,
+    query
+  )
+
+  if (isLast) {
+    paginationNext.classList.add('hidden')
+    paginationLast.classList.add('hidden')
   }
+  pagination.appendChild(paginationNext)
+  pagination.appendChild(paginationLast)
 
   main.appendChild(pagination)
 }
