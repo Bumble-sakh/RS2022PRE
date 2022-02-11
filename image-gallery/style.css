@@ -1,3 +1,8 @@
+@font-face {
+  font-family: RedHatDisplay;
+  src: url(RedHatDisplay.ttf);
+}
+
 :root {
   --main-color: #ffffff;
   --text-color: #767676;
@@ -5,6 +10,7 @@
   --box--shadow: #d3d3d3;
   --border-color: #d1d1d1;
   --input-bg: #eeeeee;
+  --font-regular: 800 32px RedHatDisplay;
 }
 
 html,
@@ -13,6 +19,7 @@ body {
   padding: 0;
   height: 100%;
   color: var(--text-color);
+  font: var(--font-regular);
 }
 
 .wrapper {
@@ -22,6 +29,7 @@ body {
 .link {
   text-decoration: none;
   color: var(--text-color);
+  transition: 0.5s;
 }
 
 .link:hover {
@@ -34,8 +42,9 @@ body {
   justify-content: space-between;
   position: fixed;
   top: 0;
+  box-sizing: border-box;
   width: 100%;
-  height: 60px;
+  height: 72px;
   z-index: 1;
   box-sizing: border-box;
   padding: 20px;
@@ -49,11 +58,72 @@ body {
   justify-content: space-around;
 }
 
+.btn {
+  border: none;
+  background: none;
+  color: var(--text-color);
+  font: var(--font-regular);
+}
+
+.search {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  gap: 10px;
+  align-content: center;
+  position: relative;
+  box-sizing: border-box;
+  padding: 3px 15px;
+  border-radius: 20px;
+  background: var(--input-bg);
+}
+
+.search__input {
+  width: 160px;
+  box-sizing: border-box;
+  padding: 0;
+  border: none;
+  background: none;
+  outline: none;
+}
+
+.search__input::-webkit-search-cancel-button {
+  -webkit-appearance: none;
+}
+
+.search__input:focus .search {
+  background: var(--main-color);
+  border: 1px solid var(--border-color);
+}
+
+.cancel__button {
+  position: absolute;
+  top: 6px;
+  right: 35px;
+  font-size: 16px;
+}
+
+.cancel__button:hover {
+  cursor: pointer;
+}
+
+.cancel__button.hidden {
+  display: none;
+}
+
+.search__button {
+  font-size: 16px;
+}
+
+.search__button:hover {
+  cursor: pointer;
+}
+
 .main {
   display: flex;
   flex-direction: column;
   justify-content: center;
-  padding: 70px 0;
+  padding: 77px 0;
 }
 
 .gallery {
@@ -239,8 +309,9 @@ body {
   background: #f7f7f7;
   position: fixed;
   bottom: 0;
+  box-sizing: border-box;
   width: 100%;
-  height: 60px;
+  height: 72px;
   box-sizing: border-box;
   padding: 20px;
   background: var(--main-color);
