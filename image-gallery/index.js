@@ -1,4 +1,5 @@
-const id = 'DPhh7QWX3sURSxFOKV1pJCwLMtmCkKsWBVZXyhLDr9g'
+const queryId = 'DPhh7QWX3sURSxFOKV1pJCwLMtmCkKsWBVZXyhLDr9g'
+const randomId = 'l-PNstaWCbZt-Gi7lA1M7LLwXavtYSMZ6-WJSXkpIzo'
 
 /* variables */
 let isQuery = false
@@ -33,7 +34,7 @@ let observer = new IntersectionObserver(
 async function getRandomPhoto() {
   const themes = ['girl', 'car', 'city', 'world', 'beach']
   const query = themes[Math.floor(Math.random() * themes.length)]
-  const url = `https://api.unsplash.com/photos/random/?query=${query}&count=26&orientation=landscape&client_id=${id}`
+  const url = `https://api.unsplash.com/photos/random/?query=${query}&count=26&orientation=landscape&client_id=${randomId}`
   const data = await fetch(url)
   const result = {
     current_page: 0,
@@ -45,7 +46,7 @@ async function getRandomPhoto() {
 }
 
 async function getQueryPhoto(query, currentPage = 1) {
-  const url = `https://api.unsplash.com/search/photos?page=${currentPage}&per_page=26&query=${query}&orientation=landscape&client_id=${id}`
+  const url = `https://api.unsplash.com/search/photos?page=${currentPage}&per_page=26&query=${query}&orientation=landscape&client_id=${queryId}`
   const data = await fetch(url)
   const result = await data.json()
   result['current_page'] = currentPage
@@ -249,4 +250,4 @@ cancelButton.addEventListener('click', () => {
 
 /* init */
 
-// getRandomPhoto().then(renderImages)
+getRandomPhoto().then(renderImages)
