@@ -11,6 +11,22 @@ const main = document.querySelector('.main')
 const searchInput = document.querySelector('.search__input')
 const searchBtn = document.querySelector('.search__button')
 
+/* observers */
+
+let observer = new IntersectionObserver(
+  (entries, observer) => {
+    entries.forEach((entry) => {
+      if (entry.isIntersecting) {
+        observer.unobserve(entry.target)
+        console.log('LazyLoad...')
+      }
+    })
+  },
+  {
+    threshold: 0.3,
+  }
+)
+
 /* functions */
 
 async function getRandomPhoto() {
@@ -88,6 +104,8 @@ function renderImages({
   })
 
   main.appendChild(container)
+
+  observer.observe(document.querySelector('.gallery:last-child'))
 }
 
 function getPhoto() {
