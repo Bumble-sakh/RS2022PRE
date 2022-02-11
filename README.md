@@ -7,3 +7,4 @@ Private repository for @bumble-sakh
 - [Portfolio](https://rolling-scopes-school.github.io/bumble-sakh-JSFEPRESCHOOL/portfolio/)
 - [Eco sounds](https://rolling-scopes-school.github.io/bumble-sakh-JSFEPRESCHOOL/eco-sounds/)
 - [Audio player](https://rolling-scopes-school.github.io/bumble-sakh-JSFEPRESCHOOL/audio-player/)
+- [Random quotes](https://rolling-scopes-school.github.io/bumble-sakh-JSFEPRESCHOOL/random-quotes/)
