@@ -10,6 +10,7 @@
   --box--shadow: #d3d3d3;
   --border-color: #d1d1d1;
   --input-bg: #eeeeee;
+  --text-info: #c0c0c0;
   --font-regular: 800 32px RedHatDisplay;
 }
 
@@ -55,7 +56,9 @@ body {
 .header .title {
   display: flex;
   flex-direction: row;
-  justify-content: space-around;
+  justify-content: space-between;
+  align-items: center;
+  gap: 20px;
 }
 
 .btn {
@@ -63,6 +66,11 @@ body {
   background: none;
   color: var(--text-color);
   font: var(--font-regular);
+}
+
+.btn:hover {
+  cursor: pointer;
+  color: var(--text-hover);
 }
 
 .search {
@@ -162,7 +170,7 @@ body {
   left: 0;
   width: 100%;
   height: 100%;
-  background-color: rgba(0, 0, 0, 0.3);
+  background-color: rgba(0, 0, 0, 0.5);
   opacity: 0;
   transition: opacity 0.5s;
 }
@@ -174,11 +182,32 @@ body {
   margin: 10px;
 }
 
+.image__info__header .btn {
+  color: var(--text-info);
+}
+.image__info__header .btn:hover {
+  color: var(--main-color);
+  transition: 0.5s;
+}
+
 .image__info__footer {
   display: flex;
   flex-direction: row;
   justify-content: space-between;
   margin: 10px;
+}
+
+.image__info__footer__author {
+  color: var(--text-info);
+}
+
+.image__info__footer .btn .link {
+  color: var(--text-info);
+}
+
+.image__info__footer .btn:hover .link {
+  color: var(--main-color);
+  transition: 0.5s;
 }
 
 .gallery__image:hover .image__info {
