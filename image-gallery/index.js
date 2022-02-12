@@ -1,5 +1,12 @@
 const queryId = 'DPhh7QWX3sURSxFOKV1pJCwLMtmCkKsWBVZXyhLDr9g'
-const randomId = 'l-PNstaWCbZt-Gi7lA1M7LLwXavtYSMZ6-WJSXkpIzo'
+const randomId = [
+  'l-PNstaWCbZt-Gi7lA1M7LLwXavtYSMZ6-WJSXkpIzo',
+  'u2oN4WP0CW74WNuBBy2pbWDe4sBptOSA8H5ZSKXV18E',
+  '2JAYGhP7pU3P7PviqWiRhWP2NZp9XrULb3AbMvrO50M',
+  'm04wUMU11U1rks-s4PrmJABXOOT9S7VQSUTgaIkGNRw',
+  'RzA2GRrNiUVb-cfLP3w-qYvcJO4G0fV0Xp4sOw0HRBI',
+]
+let randomIdCount = 0
 
 /* variables */
 let isQuery = false
@@ -34,12 +41,20 @@ let observer = new IntersectionObserver(
 async function getRandomPhoto() {
   const themes = ['girl', 'car', 'city', 'world', 'beach']
   const query = themes[Math.floor(Math.random() * themes.length)]
-  const url = `https://api.unsplash.com/photos/random/?query=${query}&count=26&orientation=landscape&client_id=${randomId}`
-  const data = await fetch(url)
+  const url = `https://api.unsplash.com/photos/random/?query=${query}&count=26&orientation=landscape&client_id=${randomId[randomIdCount]}`
+  const response = await fetch(url)
+  if (!response.ok) {
+    if (response.status === 403) {
+      randomIdCount++
+      console.log('New ID - ', randomId[randomIdCount])
+      alert('403')
+      getRandomPhoto().then(renderImages)
+    }
+  }
   const result = {
     current_page: 0,
     total_pages: 0,
-    results: await data.json(),
+    results: await response.json(),
   }
   console.log('Random', result)
   return result
@@ -47,8 +62,8 @@ async function getRandomPhoto() {
 
 async function getQueryPhoto(query, currentPage = 1) {
   const url = `https://api.unsplash.com/search/photos?page=${currentPage}&per_page=26&query=${query}&orientation=landscape&client_id=${queryId}`
-  const data = await fetch(url)
-  const result = await data.json()
+  const response = await fetch(url)
+  const result = await response.json()
   result['current_page'] = currentPage
   currentPage++
   console.log('Query', result)
