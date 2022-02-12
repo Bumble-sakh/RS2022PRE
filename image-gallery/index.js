@@ -1,5 +1,12 @@
 const queryId = 'DPhh7QWX3sURSxFOKV1pJCwLMtmCkKsWBVZXyhLDr9g'
-const randomId = 'l-PNstaWCbZt-Gi7lA1M7LLwXavtYSMZ6-WJSXkpIzo'
+const randomId = [
+  'l-PNstaWCbZt-Gi7lA1M7LLwXavtYSMZ6-WJSXkpIzo',
+  'u2oN4WP0CW74WNuBBy2pbWDe4sBptOSA8H5ZSKXV18E',
+  '2JAYGhP7pU3P7PviqWiRhWP2NZp9XrULb3AbMvrO50M',
+  'm04wUMU11U1rks-s4PrmJABXOOT9S7VQSUTgaIkGNRw',
+  'RzA2GRrNiUVb-cfLP3w-qYvcJO4G0fV0Xp4sOw0HRBI',
+]
+let randomIdCount = 0
 
 /* variables */
 let isQuery = false
@@ -15,17 +22,18 @@ const cancelButton = document.querySelector('.cancel__button')
 
 /* observers */
 
-let observer = new IntersectionObserver(
+const observer = new IntersectionObserver(
   (entries, observer) => {
     entries.forEach((entry) => {
       if (entry.isIntersecting) {
         observer.unobserve(entry.target)
         console.log('LazyLoad...')
+        getRandomPhoto().then(renderImages)
       }
     })
   },
   {
-    threshold: 0.9,
+    threshold: 0.1,
   }
 )
 
@@ -34,12 +42,25 @@ let observer = new IntersectionObserver(
 async function getRandomPhoto() {
   const themes = ['girl', 'car', 'city', 'world', 'beach']
   const query = themes[Math.floor(Math.random() * themes.length)]
-  const url = `https://api.unsplash.com/photos/random/?query=${query}&count=26&orientation=landscape&client_id=${randomId}`
-  const data = await fetch(url)
+  const url = `https://api.unsplash.com/photos/random/?query=${query}&count=26&orientation=landscape&client_id=${randomId[randomIdCount]}`
+  const response = await fetch(url)
+  if (!response.ok) {
+    if (response.status === 403) {
+      randomIdCount++
+      console.log('New ID - ', randomId[randomIdCount])
+      const alertText = `
+      Demo access allows only 50 requests per hour. After clicking 'OK', I'll try to change the request ID. If the photos do not appear, try to check the work after 1 hour.
+
+      Демо доступ разрешает только 50 запросов в час. После нажатия 'ОК' я попробую поменять ID для запросов. Если фото не появятся, попробуйте проверить работу через 1 час.
+      `
+      alert(alertText)
+      getRandomPhoto().then(renderImages)
+    }
+  }
   const result = {
     current_page: 0,
     total_pages: 0,
-    results: await data.json(),
+    results: await response.json(),
   }
   console.log('Random', result)
   return result
@@ -47,8 +68,8 @@ async function getRandomPhoto() {
 
 async function getQueryPhoto(query, currentPage = 1) {
   const url = `https://api.unsplash.com/search/photos?page=${currentPage}&per_page=26&query=${query}&orientation=landscape&client_id=${queryId}`
-  const data = await fetch(url)
-  const result = await data.json()
+  const response = await fetch(url)
+  const result = await response.json()
   result['current_page'] = currentPage
   currentPage++
   console.log('Query', result)
@@ -84,11 +105,6 @@ function renderImages({
     <div class="gallery__image">
       <img src="${url}" alt="${alt}" />
       <div class="image__info">
-        <div class="image__info__header">
-          <button class="image__info__header__favorites btn"  data-id="${imageId}">
-            <i class="uil uil-plus"></i>
-          </button>
-        </div>
         <div class="image__info__footer">
           <div class="image__info__footer__author">${authorName}</div>
           <button class="image__info__footer__download btn">
@@ -130,24 +146,26 @@ function renderPagination(currentPage, totalPages) {
   const pagination = document.createElement('div')
   pagination.classList.add('pagination')
 
-  if (!isFirst) {
-    const paginationFirst = renderPaginationButton(
-      'pagination__first',
-      'uil-angle-double-left',
-      1,
-      query
-    )
+  const paginationFirst = renderPaginationButton(
+    'pagination__first',
+    'uil-angle-double-left',
+    1,
+    query
+  )
+  const paginationPrev = renderPaginationButton(
+    'pagination__prev',
+    'uil-angle-left',
+    currentPage - 1,
+    query
+  )
 
-    const paginationPrev = renderPaginationButton(
-      'pagination__prev',
-      'uil-angle-left',
-      currentPage - 1,
-      query
-    )
-
-    pagination.appendChild(paginationFirst)
-    pagination.appendChild(paginationPrev)
+  if (isFirst) {
+    paginationFirst.classList.add('hidden')
+    paginationPrev.classList.add('hidden')
   }
+
+  pagination.appendChild(paginationFirst)
+  pagination.appendChild(paginationPrev)
 
   const paginationPages = document.createElement('div')
   pagination.classList.add('pagination__pages')
@@ -164,23 +182,26 @@ function renderPagination(currentPage, totalPages) {
 
   pagination.appendChild(paginationPages)
 
-  if (!isLast) {
-    const paginationNext = renderPaginationButton(
-      'pagination__next',
-      'uil-angle-right',
-      currentPage + 1,
-      query
-    )
-    pagination.appendChild(paginationNext)
+  const paginationNext = renderPaginationButton(
+    'pagination__next',
+    'uil-angle-right',
+    currentPage + 1,
+    query
+  )
 
-    const paginationLast = renderPaginationButton(
-      'pagination__last',
-      'uil-angle-double-right',
-      totalPages,
-      query
-    )
-    pagination.appendChild(paginationLast)
+  const paginationLast = renderPaginationButton(
+    'pagination__last',
+    'uil-angle-double-right',
+    totalPages,
+    query
+  )
+
+  if (isLast) {
+    paginationNext.classList.add('hidden')
+    paginationLast.classList.add('hidden')
   }
+  pagination.appendChild(paginationNext)
+  pagination.appendChild(paginationLast)
 
   main.appendChild(pagination)
 }
@@ -220,6 +241,35 @@ function getPhoto() {
   }
 }
 
+function selfRating() {
+  console.log(`
+Score: 70 / 70
+- [x] Вёрстка +10
+    - на странице есть несколько фото и строка поиска +5
+    - в футере приложения есть ссылка на гитхаб автора приложения, год создания приложения, [логотип курса](https://rs.school/images/rs_school_js.svg) со [ссылкой на курс](https://rs.school/js-stage0/) +5
+- [x] При загрузке приложения на странице отображаются полученные от API изображения +10
+- [x] Если в поле поиска ввести слово и отправить поисковый запрос, на странице отобразятся изображения соответствующей тематики, если такие данные предоставляет API +10
+- [x] Поиск +30
+    - при открытии приложения курсор находится в поле ввода +5
+    - есть placeholder +5
+    - автозаполнение поля ввода отключено (нет выпадающего списка с предыдущими запросами) +5
+    - поисковый запрос можно отправить нажатием клавиши Enter +5
+    - после отправки поискового запроса и отображения результатов поиска, поисковый запрос продолжает отображаться в поле ввода +5
+    - в поле ввода есть крестик при клике по которому поисковый запрос из поля ввода удаляется и отображается placeholder +5
+- [x] Очень высокое качество оформления приложения и/или дополнительный не предусмотренный в задании функционал, улучшающий качество приложения +10
+    - высокое качество оформления приложения предполагает собственное оригинальное оформление равное или отличающееся в лучшую сторону по сравнению с демо
+  `)
+
+  console.log(`
+Доп. функционал:
+- [x] Для вывода фотографий реализована несимметричная сетка.
+- [x] На стартовой страницу реализована бесконечная лента. При приближении к концу страницы автоматически продгружаются новые случайные фото.
+  !!! Не злоупотребляйте, пожалуйста этим функционалом, т.к. по умолчанию доступно только 50 запросов в час. !!!
+- [x] При выводе фото по запросу реализована пагинация - разделение большого массива данных, на отдельные страницы для удобства использования.
+- [x] Реализованна кнопка для скачивания понравившегося фото.
+  `)
+}
+
 /* Listeners */
 
 searchInput.addEventListener('keypress', (e) => {
@@ -249,5 +299,7 @@ cancelButton.addEventListener('click', () => {
 })
 
 /* init */
+
+selfRating()
 
 getRandomPhoto().then(renderImages)
