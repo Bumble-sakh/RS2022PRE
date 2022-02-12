@@ -22,17 +22,18 @@ const cancelButton = document.querySelector('.cancel__button')
 
 /* observers */
 
-let observer = new IntersectionObserver(
+const observer = new IntersectionObserver(
   (entries, observer) => {
     entries.forEach((entry) => {
       if (entry.isIntersecting) {
         observer.unobserve(entry.target)
         console.log('LazyLoad...')
+        getRandomPhoto().then(renderImages)
       }
     })
   },
   {
-    threshold: 0.9,
+    threshold: 0.1,
   }
 )
 
