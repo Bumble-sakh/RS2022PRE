@@ -48,7 +48,12 @@ async function getRandomPhoto() {
     if (response.status === 403) {
       randomIdCount++
       console.log('New ID - ', randomId[randomIdCount])
-      alert('403')
+      const alertText = `
+      Demo access allows only 50 requests per hour. After clicking 'OK', I'll try to change the request ID. If the photos do not appear, try to check the work after 1 hour.
+
+      Демо доступ разрешает только 50 запросов в час. После нажатия 'ОК' я попробую поменять ID для запросов. Если фото не появятся, попробуйте проверить работу через 1 час.
+      `
+      alert(alertText)
       getRandomPhoto().then(renderImages)
     }
   }
