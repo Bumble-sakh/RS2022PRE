@@ -1,4 +1,7 @@
 let symbol = 'cross'
+let startGame = 0
+let endGame = {}
+let isEnd = false
 
 const winCombinations = [
   ['1', '2', '3'],
@@ -85,6 +88,15 @@ const turns = {
 
 const main = document.querySelector('.game__main')
 
+function initGame() {
+  symbol = 'cross'
+  endGame = {}
+  isEnd = false
+  renderBoard()
+  startGame = Date.now()
+  setTimeout(timer, 500)
+}
+
 function move(target) {
   target.innerHTML = svg[symbol]
   turns[symbol] += target.dataset.cell
@@ -108,11 +120,17 @@ function isDraw() {
 }
 
 function renderWin() {
+  isEnd = true
   console.log('win', symbol)
+
+  clearMain()
 }
 
 function renderDraw() {
+  isEnd = true
   console.log('draw')
+
+  clearMain()
 }
 
 function renderBoard() {
@@ -197,9 +215,30 @@ function renderBoard() {
     <div class="cell" data-empty="true" data-cell="9"></div>
   </div>
   `
-
+  clearMain()
   main.insertAdjacentHTML('afterbegin', board)
 }
+
+function clearMain() {
+  main.innerHTML = ''
+}
+
+function timer() {
+  const time = document.querySelector('.time')
+  const passed = Math.floor((Date.now() - startGame) / 1000)
+  const min = Math.trunc(passed / 60)
+    .toString()
+    .padStart(2, '0')
+  const sec = (passed % 60).toString().padStart(2, '0')
+  time.textContent = `${min}:${sec}`
+  if (isEnd) {
+    endGame = { min: min, sec: sec }
+    return
+  }
+  setTimeout(timer, 500)
+}
+
+/* listeners */
 
 main.addEventListener('click', (e) => {
   if (e.target.classList.contains('cell')) {
@@ -212,4 +251,4 @@ main.addEventListener('click', (e) => {
 
 /* init */
 
-renderBoard()
+initGame()
