@@ -80,12 +80,6 @@ body {
   justify-content: center;
 }
 
-.move {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-}
 /* footer */
 
 .footer {
