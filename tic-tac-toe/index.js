@@ -2,12 +2,13 @@ let symbol = 'cross'
 let startGame = 0
 let endGame = {}
 let isEnd = false
+let score = localStorage.score ? JSON.parse(localStorage.score) : []
 
 const winCombinations = [
   ['1', '2', '3'],
   ['4', '5', '6'],
   ['7', '8', '9'],
-  ['1', '4', ' 7'],
+  ['1', '4', '7'],
   ['2', '5', '8'],
   ['3', '6', '9'],
   ['1', '5', '9'],
@@ -92,6 +93,8 @@ function initGame() {
   symbol = 'cross'
   endGame = {}
   isEnd = false
+  turns.cross = ''
+  turns.circle = ''
   renderBoard()
   startGame = Date.now()
   setTimeout(timer, 500)
@@ -100,7 +103,7 @@ function initGame() {
 function move(target) {
   target.innerHTML = svg[symbol]
   turns[symbol] += target.dataset.cell
-  isWin() ? renderWin() : isDraw() ? renderDraw() : null
+  isWin() ? renderResult('win') : isDraw() ? renderResult('draw') : null
   symbol = symbol === 'cross' ? 'circle' : 'cross'
 }
 
@@ -119,18 +122,50 @@ function isDraw() {
   return turns.cross.length + turns.circle.length === 9
 }
 
-function renderWin() {
+function renderResult(result) {
   isEnd = true
-  console.log('win', symbol)
+  const turn = turns.cross.length + turns.circle.length
+  const gameResult = [result, result === 'draw' ? '' : symbol, turn, endGame]
+  score.unshift(gameResult)
+  score.length = score.length > 10 ? 10 : score.length
+  localStorage.setItem('score', JSON.stringify(score))
+
+  const resultBlock = `
+  <div class="result">
+    <div class="result__title">${
+      (result === 'draw' ? '' : symbol, result)
+    }</div>
+    <div class="result__turns">${turn} turns</div>
+    <div class="result__table">
+      <table>
+        <th>
+          <td>Result</td>
+          <td>Turns</td>
+          <td>Time</td>
+        </th>
+        ${renderScore()}
+      </table>
+    </div>
+    <div class="result__restart-btn">
+      <button class="restart-btn">Try again</button>
+    </div>
+  </div>
+  `
 
   clearMain()
+  main.insertAdjacentHTML('afterbegin', resultBlock)
 }
 
-function renderDraw() {
-  isEnd = true
-  console.log('draw')
-
-  clearMain()
+function renderScore() {
+  let rows = ''
+  for (let i = 0; i < score.length; i++) {
+    rows += `<tr>
+              <td>${score[i][0]} ${score[i][1]}</td>
+              <td>${score[i][2]}</td>
+              <td>${score[i][3].min}:${score[i][3].sec}</td>
+            </tr>`
+  }
+  return rows
 }
 
 function renderBoard() {
@@ -231,11 +266,11 @@ function timer() {
     .padStart(2, '0')
   const sec = (passed % 60).toString().padStart(2, '0')
   time.textContent = `${min}:${sec}`
+  endGame = { min: min, sec: sec }
   if (isEnd) {
-    endGame = { min: min, sec: sec }
-    return
+    return (endGame = { min: min, sec: sec })
   }
-  setTimeout(timer, 500)
+  setTimeout(timer, 100)
 }
 
 /* listeners */
@@ -246,6 +281,9 @@ main.addEventListener('click', (e) => {
       e.target.dataset.empty = 'false'
       move(e.target)
     }
+  }
+  if (e.target.classList.contains('restart-btn')) {
+    initGame()
   }
 })
 
