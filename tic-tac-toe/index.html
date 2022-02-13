@@ -9,6 +9,883 @@
     <title>Tic-tac-toe</title>
   </head>
   <body>
+    <header class="header">Tic-tac-toe</header>
+    <main class="main">
+      <div class="game">
+        <div class="game__header">
+          <div class="back">
+            <button class="btn">Back</button>
+          </div>
+          <div class="timer">00:00</div>
+          <div class="mute"><button class="btn">Mute</button></div>
+        </div>
+        <div class="game__main">
+          <div class="board">
+            <div class="grid">
+              <svg width="470" height="470" xmlns="http://www.w3.org/2000/svg">
+                <line
+                  class="line first"
+                  y2="470"
+                  x2="155"
+                  y1="0"
+                  x1="155"
+                  stroke-width="10"
+                  stroke="#000"
+                  fill="none"
+                />
+                <line
+                  class="line second"
+                  y2="470"
+                  x2="315"
+                  y1="0"
+                  x1="315"
+                  stroke-width="10"
+                  stroke="#000"
+                  fill="none"
+                />
+                <line
+                  class="line third"
+                  y2="155"
+                  x2="470"
+                  y1="155"
+                  x1="0"
+                  stroke-width="10"
+                  stroke="#000"
+                  fill="none"
+                />
+                <line
+                  class="line fourth"
+                  y2="315"
+                  x2="470"
+                  y1="315"
+                  x1="0"
+                  stroke-width="10"
+                  stroke="#000"
+                  fill="none"
+                />
+                <style>
+                  .line {
+                    stroke-dasharray: 500;
+                    stroke-dashoffset: 500;
+                    animation: draw 0.5s linear forwards;
+                    animation-iteration-count: 1;
+                  }
+                  .line.second {
+                    animation-delay: 0.3s;
+                  }
+
+                  .line.third {
+                    animation-delay: 0.6s;
+                  }
+
+                  .line.fourth {
+                    animation-delay: 0.9s;
+                  }
+                  @keyframes draw {
+                    100% {
+                      stroke-dashoffset: 0;
+                    }
+                  }
+                </style>
+              </svg>
+            </div>
+            <div class="cell">
+              <svg
+                width="150"
+                height="150"
+                xmlns="http://www.w3.org/2000/svg"
+                class="svg none"
+              >
+                <g class="cross">
+                  <line
+                    class="line first"
+                    y2="130"
+                    x2="130"
+                    y1="20"
+                    x1="20"
+                    stroke-width="10"
+                    stroke="#000"
+                    fill="none"
+                  />
+                  <line
+                    class="line second"
+                    y2="130"
+                    x2="20"
+                    y1="20"
+                    x1="130"
+                    stroke-width="10"
+                    stroke="#000"
+                    fill="none"
+                  />
+                  <style>
+                    .line {
+                      stroke-dasharray: 500;
+                      stroke-dashoffset: 500;
+                      animation: draw 0.5s linear forwards;
+                      animation-iteration-count: 1;
+                    }
+                    .line.second {
+                      animation-delay: 0.3s;
+                    }
+                    @keyframes draw {
+                      100% {
+                        stroke-dashoffset: 0;
+                      }
+                    }
+                  </style>
+                </g>
+                <g class="circle">
+                  <circle
+                    class="circle"
+                    stroke-width="10"
+                    r="60"
+                    cy="75"
+                    cx="75"
+                    stroke="#000"
+                    fill="none"
+                  />
+                  <style>
+                    .circle {
+                      stroke-dasharray: 500;
+                      stroke-dashoffset: 500;
+                      animation: draw 0.5s linear forwards;
+                      animation-iteration-count: 1;
+                    }
+                    @keyframes draw {
+                      100% {
+                        stroke-dashoffset: 0;
+                      }
+                    }
+                  </style>
+                </g>
+
+                <style>
+                  .svg.cross .circle {
+                    display: none;
+                  }
+
+                  .svg.circle .cross {
+                    display: none;
+                  }
+
+                  .svg.none .cross,
+                  svg.none .circle {
+                    display: none;
+                  }
+                </style>
+              </svg>
+            </div>
+            <div class="cell">
+              <svg
+                width="150"
+                height="150"
+                xmlns="http://www.w3.org/2000/svg"
+                class="svg none"
+              >
+                <g class="cross">
+                  <line
+                    class="line first"
+                    y2="130"
+                    x2="130"
+                    y1="20"
+                    x1="20"
+                    stroke-width="10"
+                    stroke="#000"
+                    fill="none"
+                  />
+                  <line
+                    class="line second"
+                    y2="130"
+                    x2="20"
+                    y1="20"
+                    x1="130"
+                    stroke-width="10"
+                    stroke="#000"
+                    fill="none"
+                  />
+                  <style>
+                    .line {
+                      stroke-dasharray: 500;
+                      stroke-dashoffset: 500;
+                      animation: draw 0.5s linear forwards;
+                      animation-iteration-count: 1;
+                    }
+                    .line.second {
+                      animation-delay: 0.3s;
+                    }
+                    @keyframes draw {
+                      100% {
+                        stroke-dashoffset: 0;
+                      }
+                    }
+                  </style>
+                </g>
+                <g class="circle">
+                  <circle
+                    class="circle"
+                    stroke-width="10"
+                    r="60"
+                    cy="75"
+                    cx="75"
+                    stroke="#000"
+                    fill="none"
+                  />
+                  <style>
+                    .circle {
+                      stroke-dasharray: 500;
+                      stroke-dashoffset: 500;
+                      animation: draw 0.5s linear forwards;
+                      animation-iteration-count: 1;
+                    }
+                    @keyframes draw {
+                      100% {
+                        stroke-dashoffset: 0;
+                      }
+                    }
+                  </style>
+                </g>
+
+                <style>
+                  .svg.cross .circle {
+                    display: none;
+                  }
+
+                  .svg.circle .cross {
+                    display: none;
+                  }
+
+                  .svg.none .cross,
+                  svg.none .circle {
+                    display: none;
+                  }
+                </style>
+              </svg>
+            </div>
+            <div class="cell">
+              <svg
+                width="150"
+                height="150"
+                xmlns="http://www.w3.org/2000/svg"
+                class="svg none"
+              >
+                <g class="cross">
+                  <line
+                    class="line first"
+                    y2="130"
+                    x2="130"
+                    y1="20"
+                    x1="20"
+                    stroke-width="10"
+                    stroke="#000"
+                    fill="none"
+                  />
+                  <line
+                    class="line second"
+                    y2="130"
+                    x2="20"
+                    y1="20"
+                    x1="130"
+                    stroke-width="10"
+                    stroke="#000"
+                    fill="none"
+                  />
+                  <style>
+                    .line {
+                      stroke-dasharray: 500;
+                      stroke-dashoffset: 500;
+                      animation: draw 0.5s linear forwards;
+                      animation-iteration-count: 1;
+                    }
+                    .line.second {
+                      animation-delay: 0.3s;
+                    }
+                    @keyframes draw {
+                      100% {
+                        stroke-dashoffset: 0;
+                      }
+                    }
+                  </style>
+                </g>
+                <g class="circle">
+                  <circle
+                    class="circle"
+                    stroke-width="10"
+                    r="60"
+                    cy="75"
+                    cx="75"
+                    stroke="#000"
+                    fill="none"
+                  />
+                  <style>
+                    .circle {
+                      stroke-dasharray: 500;
+                      stroke-dashoffset: 500;
+                      animation: draw 0.5s linear forwards;
+                      animation-iteration-count: 1;
+                    }
+                    @keyframes draw {
+                      100% {
+                        stroke-dashoffset: 0;
+                      }
+                    }
+                  </style>
+                </g>
+
+                <style>
+                  .svg.cross .circle {
+                    display: none;
+                  }
+
+                  .svg.circle .cross {
+                    display: none;
+                  }
+
+                  .svg.none .cross,
+                  svg.none .circle {
+                    display: none;
+                  }
+                </style>
+              </svg>
+            </div>
+            <div class="cell">
+              <svg
+                width="150"
+                height="150"
+                xmlns="http://www.w3.org/2000/svg"
+                class="svg none"
+              >
+                <g class="cross">
+                  <line
+                    class="line first"
+                    y2="130"
+                    x2="130"
+                    y1="20"
+                    x1="20"
+                    stroke-width="10"
+                    stroke="#000"
+                    fill="none"
+                  />
+                  <line
+                    class="line second"
+                    y2="130"
+                    x2="20"
+                    y1="20"
+                    x1="130"
+                    stroke-width="10"
+                    stroke="#000"
+                    fill="none"
+                  />
+                  <style>
+                    .line {
+                      stroke-dasharray: 500;
+                      stroke-dashoffset: 500;
+                      animation: draw 0.5s linear forwards;
+                      animation-iteration-count: 1;
+                    }
+                    .line.second {
+                      animation-delay: 0.3s;
+                    }
+                    @keyframes draw {
+                      100% {
+                        stroke-dashoffset: 0;
+                      }
+                    }
+                  </style>
+                </g>
+                <g class="circle">
+                  <circle
+                    class="circle"
+                    stroke-width="10"
+                    r="60"
+                    cy="75"
+                    cx="75"
+                    stroke="#000"
+                    fill="none"
+                  />
+                  <style>
+                    .circle {
+                      stroke-dasharray: 500;
+                      stroke-dashoffset: 500;
+                      animation: draw 0.5s linear forwards;
+                      animation-iteration-count: 1;
+                    }
+                    @keyframes draw {
+                      100% {
+                        stroke-dashoffset: 0;
+                      }
+                    }
+                  </style>
+                </g>
+
+                <style>
+                  .svg.cross .circle {
+                    display: none;
+                  }
+
+                  .svg.circle .cross {
+                    display: none;
+                  }
+
+                  .svg.none .cross,
+                  svg.none .circle {
+                    display: none;
+                  }
+                </style>
+              </svg>
+            </div>
+            <div class="cell">
+              <svg
+                width="150"
+                height="150"
+                xmlns="http://www.w3.org/2000/svg"
+                class="svg none"
+              >
+                <g class="cross">
+                  <line
+                    class="line first"
+                    y2="130"
+                    x2="130"
+                    y1="20"
+                    x1="20"
+                    stroke-width="10"
+                    stroke="#000"
+                    fill="none"
+                  />
+                  <line
+                    class="line second"
+                    y2="130"
+                    x2="20"
+                    y1="20"
+                    x1="130"
+                    stroke-width="10"
+                    stroke="#000"
+                    fill="none"
+                  />
+                  <style>
+                    .line {
+                      stroke-dasharray: 500;
+                      stroke-dashoffset: 500;
+                      animation: draw 0.5s linear forwards;
+                      animation-iteration-count: 1;
+                    }
+                    .line.second {
+                      animation-delay: 0.3s;
+                    }
+                    @keyframes draw {
+                      100% {
+                        stroke-dashoffset: 0;
+                      }
+                    }
+                  </style>
+                </g>
+                <g class="circle">
+                  <circle
+                    class="circle"
+                    stroke-width="10"
+                    r="60"
+                    cy="75"
+                    cx="75"
+                    stroke="#000"
+                    fill="none"
+                  />
+                  <style>
+                    .circle {
+                      stroke-dasharray: 500;
+                      stroke-dashoffset: 500;
+                      animation: draw 0.5s linear forwards;
+                      animation-iteration-count: 1;
+                    }
+                    @keyframes draw {
+                      100% {
+                        stroke-dashoffset: 0;
+                      }
+                    }
+                  </style>
+                </g>
+
+                <style>
+                  .svg.cross .circle {
+                    display: none;
+                  }
+
+                  .svg.circle .cross {
+                    display: none;
+                  }
+
+                  .svg.none .cross,
+                  svg.none .circle {
+                    display: none;
+                  }
+                </style>
+              </svg>
+            </div>
+            <div class="cell">
+              <svg
+                width="150"
+                height="150"
+                xmlns="http://www.w3.org/2000/svg"
+                class="svg none"
+              >
+                <g class="cross">
+                  <line
+                    class="line first"
+                    y2="130"
+                    x2="130"
+                    y1="20"
+                    x1="20"
+                    stroke-width="10"
+                    stroke="#000"
+                    fill="none"
+                  />
+                  <line
+                    class="line second"
+                    y2="130"
+                    x2="20"
+                    y1="20"
+                    x1="130"
+                    stroke-width="10"
+                    stroke="#000"
+                    fill="none"
+                  />
+                  <style>
+                    .line {
+                      stroke-dasharray: 500;
+                      stroke-dashoffset: 500;
+                      animation: draw 0.5s linear forwards;
+                      animation-iteration-count: 1;
+                    }
+                    .line.second {
+                      animation-delay: 0.3s;
+                    }
+                    @keyframes draw {
+                      100% {
+                        stroke-dashoffset: 0;
+                      }
+                    }
+                  </style>
+                </g>
+                <g class="circle">
+                  <circle
+                    class="circle"
+                    stroke-width="10"
+                    r="60"
+                    cy="75"
+                    cx="75"
+                    stroke="#000"
+                    fill="none"
+                  />
+                  <style>
+                    .circle {
+                      stroke-dasharray: 500;
+                      stroke-dashoffset: 500;
+                      animation: draw 0.5s linear forwards;
+                      animation-iteration-count: 1;
+                    }
+                    @keyframes draw {
+                      100% {
+                        stroke-dashoffset: 0;
+                      }
+                    }
+                  </style>
+                </g>
+
+                <style>
+                  .svg.cross .circle {
+                    display: none;
+                  }
+
+                  .svg.circle .cross {
+                    display: none;
+                  }
+
+                  .svg.none .cross,
+                  svg.none .circle {
+                    display: none;
+                  }
+                </style>
+              </svg>
+            </div>
+            <div class="cell">
+              <svg
+                width="150"
+                height="150"
+                xmlns="http://www.w3.org/2000/svg"
+                class="svg none"
+              >
+                <g class="cross">
+                  <line
+                    class="line first"
+                    y2="130"
+                    x2="130"
+                    y1="20"
+                    x1="20"
+                    stroke-width="10"
+                    stroke="#000"
+                    fill="none"
+                  />
+                  <line
+                    class="line second"
+                    y2="130"
+                    x2="20"
+                    y1="20"
+                    x1="130"
+                    stroke-width="10"
+                    stroke="#000"
+                    fill="none"
+                  />
+                  <style>
+                    .line {
+                      stroke-dasharray: 500;
+                      stroke-dashoffset: 500;
+                      animation: draw 0.5s linear forwards;
+                      animation-iteration-count: 1;
+                    }
+                    .line.second {
+                      animation-delay: 0.3s;
+                    }
+                    @keyframes draw {
+                      100% {
+                        stroke-dashoffset: 0;
+                      }
+                    }
+                  </style>
+                </g>
+                <g class="circle">
+                  <circle
+                    class="circle"
+                    stroke-width="10"
+                    r="60"
+                    cy="75"
+                    cx="75"
+                    stroke="#000"
+                    fill="none"
+                  />
+                  <style>
+                    .circle {
+                      stroke-dasharray: 500;
+                      stroke-dashoffset: 500;
+                      animation: draw 0.5s linear forwards;
+                      animation-iteration-count: 1;
+                    }
+                    @keyframes draw {
+                      100% {
+                        stroke-dashoffset: 0;
+                      }
+                    }
+                  </style>
+                </g>
+
+                <style>
+                  .svg.cross .circle {
+                    display: none;
+                  }
+
+                  .svg.circle .cross {
+                    display: none;
+                  }
+
+                  .svg.none .cross,
+                  svg.none .circle {
+                    display: none;
+                  }
+                </style>
+              </svg>
+            </div>
+            <div class="cell">
+              <svg
+                width="150"
+                height="150"
+                xmlns="http://www.w3.org/2000/svg"
+                class="svg none"
+              >
+                <g class="cross">
+                  <line
+                    class="line first"
+                    y2="130"
+                    x2="130"
+                    y1="20"
+                    x1="20"
+                    stroke-width="10"
+                    stroke="#000"
+                    fill="none"
+                  />
+                  <line
+                    class="line second"
+                    y2="130"
+                    x2="20"
+                    y1="20"
+                    x1="130"
+                    stroke-width="10"
+                    stroke="#000"
+                    fill="none"
+                  />
+                  <style>
+                    .line {
+                      stroke-dasharray: 500;
+                      stroke-dashoffset: 500;
+                      animation: draw 0.5s linear forwards;
+                      animation-iteration-count: 1;
+                    }
+                    .line.second {
+                      animation-delay: 0.3s;
+                    }
+                    @keyframes draw {
+                      100% {
+                        stroke-dashoffset: 0;
+                      }
+                    }
+                  </style>
+                </g>
+                <g class="circle">
+                  <circle
+                    class="circle"
+                    stroke-width="10"
+                    r="60"
+                    cy="75"
+                    cx="75"
+                    stroke="#000"
+                    fill="none"
+                  />
+                  <style>
+                    .circle {
+                      stroke-dasharray: 500;
+                      stroke-dashoffset: 500;
+                      animation: draw 0.5s linear forwards;
+                      animation-iteration-count: 1;
+                    }
+                    @keyframes draw {
+                      100% {
+                        stroke-dashoffset: 0;
+                      }
+                    }
+                  </style>
+                </g>
+
+                <style>
+                  .svg.cross .circle {
+                    display: none;
+                  }
+
+                  .svg.circle .cross {
+                    display: none;
+                  }
+
+                  .svg.none .cross,
+                  svg.none .circle {
+                    display: none;
+                  }
+                </style>
+              </svg>
+            </div>
+            <div class="cell">
+              <svg
+                width="150"
+                height="150"
+                xmlns="http://www.w3.org/2000/svg"
+                class="svg none"
+              >
+                <g class="cross">
+                  <line
+                    class="line first"
+                    y2="130"
+                    x2="130"
+                    y1="20"
+                    x1="20"
+                    stroke-width="10"
+                    stroke="#000"
+                    fill="none"
+                  />
+                  <line
+                    class="line second"
+                    y2="130"
+                    x2="20"
+                    y1="20"
+                    x1="130"
+                    stroke-width="10"
+                    stroke="#000"
+                    fill="none"
+                  />
+                  <style>
+                    .line {
+                      stroke-dasharray: 500;
+                      stroke-dashoffset: 500;
+                      animation: draw 0.5s linear forwards;
+                      animation-iteration-count: 1;
+                    }
+                    .line.second {
+                      animation-delay: 0.3s;
+                    }
+                    @keyframes draw {
+                      100% {
+                        stroke-dashoffset: 0;
+                      }
+                    }
+                  </style>
+                </g>
+                <g class="circle">
+                  <circle
+                    class="circle"
+                    stroke-width="10"
+                    r="60"
+                    cy="75"
+                    cx="75"
+                    stroke="#000"
+                    fill="none"
+                  />
+                  <style>
+                    .circle {
+                      stroke-dasharray: 500;
+                      stroke-dashoffset: 500;
+                      animation: draw 0.5s linear forwards;
+                      animation-iteration-count: 1;
+                    }
+                    @keyframes draw {
+                      100% {
+                        stroke-dashoffset: 0;
+                      }
+                    }
+                  </style>
+                </g>
+
+                <style>
+                  .svg.cross .circle {
+                    display: none;
+                  }
+
+                  .svg.circle .cross {
+                    display: none;
+                  }
+
+                  .svg.none .cross,
+                  svg.none .circle {
+                    display: none;
+                  }
+                </style>
+              </svg>
+            </div>
+          </div>
+        </div>
+        <div class="game__footer">
+          <div class="move">
+            <div class="move__title">Move</div>
+            <div class="move__counter">0000</div>
+          </div>
+        </div>
+      </div>
+    </main>
+    <footer class="footer">
+      <div class="footer__github">
+        <a href="http://github.com/bumble-sakh/" target="_blank" class="link"
+          >Igor Asessorov</a
+        >
+      </div>
+      <div class="footer__year">&copy 2022</div>
+      <div class="footer__cource">
+        <a href="https://rs.school/js-stage0/" target="_blank" class="link"
+          >RS School</a
+        >
+      </div>
+    </footer>
     <script src="index.js"></script>
   </body>
 </html>
