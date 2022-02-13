@@ -4,6 +4,13 @@ let endGame = {}
 let isEnd = false
 let score = localStorage.score ? JSON.parse(localStorage.score) : []
 
+const music = new Audio('sounds/music.mp3')
+music.volume = 0.1
+music.loop = true
+
+const clickSnd = new Audio('sounds/click.mp3')
+const moveSnd = new Audio('sounds/move.mp3')
+
 const winCombinations = [
   ['1', '2', '3'],
   ['4', '5', '6'],
@@ -88,7 +95,8 @@ const turns = {
 }
 
 const main = document.querySelector('.game__main')
-const restartBtn = document.querySelector('.restart-btn')
+const backBtn = document.querySelector('.back-btn')
+const muteBtn = document.querySelector('.mute-btn ')
 
 function initGame() {
   symbol = 'cross'
@@ -99,12 +107,14 @@ function initGame() {
   renderBoard()
   startGame = Date.now()
   setTimeout(timer, 500)
+  music.play()
 }
 
 function move(target) {
   target.innerHTML = svg[symbol]
   turns[symbol] += target.dataset.cell
   isWin() ? renderResult('win') : isDraw() ? renderResult('draw') : null
+  moveSnd.play()
   symbol = symbol === 'cross' ? 'circle' : 'cross'
 }
 
@@ -255,6 +265,23 @@ function renderBoard() {
   main.insertAdjacentHTML('afterbegin', board)
 }
 
+function renderStart() {
+  const start = `
+  <button class="start-btn btn">Start</button>
+  `
+  clearMain()
+  main.insertAdjacentHTML('afterbegin', start)
+
+  music.pause()
+  music.currentTime = 0
+
+  const startBtn = document.querySelector('.start-btn')
+  startBtn.addEventListener('click', (e) => {
+    clickSnd.play()
+    initGame()
+  })
+}
+
 function clearMain() {
   main.innerHTML = ''
 }
@@ -284,14 +311,22 @@ main.addEventListener('click', (e) => {
     }
   }
   if (e.target.classList.contains('restart-btn')) {
+    clickSnd.play()
     initGame()
   }
 })
 
-restartBtn.addEventListener('click', (e) => {
-  initGame()
+backBtn.addEventListener('click', (e) => {
+  clickSnd.play()
+  renderStart()
+})
+
+muteBtn.addEventListener('click', () => {
+  clickSnd.play()
+  music.muted = !music.muted
+  muteBtn.textContent = muteBtn.textContent === 'Mute' ? 'Unmute' : 'Mute'
 })
 
 /* init */
 
-initGame()
+renderStart()
