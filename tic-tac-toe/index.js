@@ -83,7 +83,7 @@ const turns = {
   circle: '',
 }
 
-const board = document.querySelector('.board')
+const main = document.querySelector('.game__main')
 
 function move(target) {
   target.innerHTML = svg[symbol]
@@ -116,10 +116,92 @@ function renderDraw() {
 }
 
 function renderBoard() {
-  console.log('board')
+  const board = `
+  <div class="board">
+    <div class="grid">
+      <svg width="470" height="470" xmlns="http://www.w3.org/2000/svg">
+        <line
+          class="line first"
+          y2="470"
+          x2="155"
+          y1="0"
+          x1="155"
+          stroke-width="10"
+          stroke="#000"
+          fill="none"
+        />
+        <line
+          class="line second"
+          y2="470"
+          x2="315"
+          y1="0"
+          x1="315"
+          stroke-width="10"
+          stroke="#000"
+          fill="none"
+        />
+        <line
+          class="line third"
+          y2="155"
+          x2="470"
+          y1="155"
+          x1="0"
+          stroke-width="10"
+          stroke="#000"
+          fill="none"
+        />
+        <line
+          class="line fourth"
+          y2="315"
+          x2="470"
+          y1="315"
+          x1="0"
+          stroke-width="10"
+          stroke="#000"
+          fill="none"
+        />
+        <style>
+          .line {
+            stroke-dasharray: 500;
+            stroke-dashoffset: 500;
+            animation: draw 0.5s linear forwards;
+            animation-iteration-count: 1;
+          }
+          .line.second {
+            animation-delay: 0.3s;
+          }
+
+          .line.third {
+            animation-delay: 0.6s;
+          }
+
+          .line.fourth {
+            animation-delay: 0.9s;
+          }
+          @keyframes draw {
+            100% {
+              stroke-dashoffset: 0;
+            }
+          }
+        </style>
+      </svg>
+    </div>
+    <div class="cell" data-empty="true" data-cell="1"></div>
+    <div class="cell" data-empty="true" data-cell="2"></div>
+    <div class="cell" data-empty="true" data-cell="3"></div>
+    <div class="cell" data-empty="true" data-cell="4"></div>
+    <div class="cell" data-empty="true" data-cell="5"></div>
+    <div class="cell" data-empty="true" data-cell="6"></div>
+    <div class="cell" data-empty="true" data-cell="7"></div>
+    <div class="cell" data-empty="true" data-cell="8"></div>
+    <div class="cell" data-empty="true" data-cell="9"></div>
+  </div>
+  `
+
+  main.insertAdjacentHTML('afterbegin', board)
 }
 
-board.addEventListener('click', (e) => {
+main.addEventListener('click', (e) => {
   if (e.target.classList.contains('cell')) {
     if (e.target.dataset.empty === 'true') {
       e.target.dataset.empty = 'false'
@@ -127,3 +209,7 @@ board.addEventListener('click', (e) => {
     }
   }
 })
+
+/* init */
+
+renderBoard()
