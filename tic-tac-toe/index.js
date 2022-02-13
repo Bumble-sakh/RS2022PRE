@@ -88,6 +88,7 @@ const turns = {
 }
 
 const main = document.querySelector('.game__main')
+const restartBtn = document.querySelector('.restart-btn')
 
 function initGame() {
   symbol = 'cross'
@@ -285,6 +286,10 @@ main.addEventListener('click', (e) => {
   if (e.target.classList.contains('restart-btn')) {
     initGame()
   }
+})
+
+restartBtn.addEventListener('click', (e) => {
+  initGame()
 })
 
 /* init */
