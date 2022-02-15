@@ -101,7 +101,6 @@ function initGame() {
   symbol = 'cross'
   endGame = {}
   isEnd = false
-  isMusic = false
   turns.cross = ''
   turns.circle = ''
   renderBoard()
@@ -337,6 +336,7 @@ main.addEventListener('click', (e) => {
   }
   if (e.target.classList.contains('back-btn')) {
     clickSnd.play()
+    isMusic = false
     renderStart()
   }
   if (e.target.classList.contains('music-btn')) {
