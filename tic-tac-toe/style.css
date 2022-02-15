@@ -15,7 +15,6 @@ body {
   margin: 0;
   padding: 0;
   font: var(--main-font);
-  font-size: 32px;
 }
 
 body {
@@ -26,7 +25,23 @@ body {
 
 .btn {
   font: var(--main-font);
-  font-size: 16px;
+  background: none;
+  border: none;
+}
+
+.btn:hover {
+  cursor: pointer;
+}
+
+.start-btn {
+  width: 150px;
+  height: 50px;
+  font-size: 32px;
+}
+
+.link {
+  text-decoration: none;
+  color: #000000;
 }
 
 /* header */
@@ -34,6 +49,7 @@ body {
 .header {
   text-align: center;
   padding: 20px;
+  font-size: 32px;
 }
 
 /* main */
@@ -61,6 +77,7 @@ body {
   display: flex;
   flex-direction: row;
   justify-content: center;
+  align-items: center;
   height: var(--game-height);
 }
 
@@ -94,11 +111,20 @@ body {
   justify-content: center;
 }
 
+.time {
+  font-size: 32px;
+}
+
+.result {
+  font-size: 24px;
+}
+
 /* footer */
 
 .footer {
   display: flex;
   flex-direction: row;
   justify-content: space-between;
+  font-size: 32px;
   padding: 20px;
 }
