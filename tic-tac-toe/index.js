@@ -2,6 +2,7 @@ let symbol = 'cross'
 let startGame = 0
 let endGame = {}
 let isEnd = false
+let isMusic = false
 let score = localStorage.score ? JSON.parse(localStorage.score) : []
 
 const music = new Audio('assets/sounds/music.mp3')
@@ -94,20 +95,19 @@ const turns = {
   circle: '',
 }
 
-const main = document.querySelector('.game__main')
-const backBtn = document.querySelector('.back-btn')
-const muteBtn = document.querySelector('.mute-btn ')
+const main = document.querySelector('.main')
 
 function initGame() {
   symbol = 'cross'
   endGame = {}
   isEnd = false
+  isMusic = false
   turns.cross = ''
   turns.circle = ''
   renderBoard()
   startGame = Date.now()
   setTimeout(timer, 500)
-  music.play()
+  // music.play()
 }
 
 function move(target) {
@@ -143,18 +143,22 @@ function renderResult(result) {
 
   const resultBlock = `
   <div class="result">
-    <div class="result__title">${
-      (result === 'draw' ? '' : symbol, result)
-    }</div>
+    <div class="result__title">${result} ${
+    result === 'draw' ? '' : symbol
+  }</div>
     <div class="result__turns">${turn} turns</div>
     <div class="result__table">
-      <table>
-        <th>
-          <td>Result</td>
-          <td>Turns</td>
-          <td>Time</td>
-        </th>
-        ${renderScore()}
+      <table class="table">
+        <thead>
+          <tr>
+            <th>Result</th>
+            <th>Turns</th>
+            <th>Time</th>
+          </tr>
+        </thead>  
+        <tbody>
+          ${renderScore()}
+        </tbody>
       </table>
     </div>
     <div class="result__restart-btn">
@@ -181,84 +185,99 @@ function renderScore() {
 
 function renderBoard() {
   const board = `
-  <div class="board">
-    <div class="grid">
-      <svg width="470" height="470" xmlns="http://www.w3.org/2000/svg">
-        <line
-          class="line first"
-          y2="470"
-          x2="155"
-          y1="0"
-          x1="155"
-          stroke-width="10"
-          stroke="#000"
-          fill="none"
-        />
-        <line
-          class="line second"
-          y2="470"
-          x2="315"
-          y1="0"
-          x1="315"
-          stroke-width="10"
-          stroke="#000"
-          fill="none"
-        />
-        <line
-          class="line third"
-          y2="155"
-          x2="470"
-          y1="155"
-          x1="0"
-          stroke-width="10"
-          stroke="#000"
-          fill="none"
-        />
-        <line
-          class="line fourth"
-          y2="315"
-          x2="470"
-          y1="315"
-          x1="0"
-          stroke-width="10"
-          stroke="#000"
-          fill="none"
-        />
-        <style>
-          .line {
-            stroke-dasharray: 500;
-            stroke-dashoffset: 500;
-            animation: draw 0.5s linear forwards;
-            animation-iteration-count: 1;
-          }
-          .line.second {
-            animation-delay: 0.3s;
-          }
-
-          .line.third {
-            animation-delay: 0.6s;
-          }
-
-          .line.fourth {
-            animation-delay: 0.9s;
-          }
-          @keyframes draw {
-            100% {
-              stroke-dashoffset: 0;
-            }
-          }
-        </style>
-      </svg>
+  <div class="game">
+    <div class="game__header">
+      <div class="back">
+        <button class="back-btn btn">Back</button>
+      </div>
+      <div class="music">Music: <button class="music-btn ${
+        isMusic ? '' : 'off'
+      } btn">${isMusic ? 'On' : 'Off'}</button></div>
     </div>
-    <div class="cell" data-empty="true" data-cell="1"></div>
-    <div class="cell" data-empty="true" data-cell="2"></div>
-    <div class="cell" data-empty="true" data-cell="3"></div>
-    <div class="cell" data-empty="true" data-cell="4"></div>
-    <div class="cell" data-empty="true" data-cell="5"></div>
-    <div class="cell" data-empty="true" data-cell="6"></div>
-    <div class="cell" data-empty="true" data-cell="7"></div>
-    <div class="cell" data-empty="true" data-cell="8"></div>
-    <div class="cell" data-empty="true" data-cell="9"></div>
+    <div class="game__main">
+      <div class="board">
+        <div class="grid">
+          <svg width="470" height="470" xmlns="http://www.w3.org/2000/svg">
+            <line
+              class="line first"
+              y2="470"
+              x2="155"
+              y1="0"
+              x1="155"
+              stroke-width="10"
+              stroke="#000"
+              fill="none"
+            />
+            <line
+              class="line second"
+              y2="470"
+              x2="315"
+              y1="0"
+              x1="315"
+              stroke-width="10"
+              stroke="#000"
+              fill="none"
+            />
+            <line
+              class="line third"
+              y2="155"
+              x2="470"
+              y1="155"
+              x1="0"
+              stroke-width="10"
+              stroke="#000"
+              fill="none"
+            />
+            <line
+              class="line fourth"
+              y2="315"
+              x2="470"
+              y1="315"
+              x1="0"
+              stroke-width="10"
+              stroke="#000"
+              fill="none"
+            />
+            <style>
+              .line {
+                stroke-dasharray: 500;
+                stroke-dashoffset: 500;
+                animation: draw 0.5s linear forwards;
+                animation-iteration-count: 1;
+              }
+              .line.second {
+                animation-delay: 0.3s;
+              }
+
+              .line.third {
+                animation-delay: 0.6s;
+              }
+
+              .line.fourth {
+                animation-delay: 0.9s;
+              }
+              @keyframes draw {
+                100% {
+                  stroke-dashoffset: 0;
+                }
+              }
+            </style>
+          </svg>
+        </div>
+        <div class="cell" data-empty="true" data-cell="1"></div>
+        <div class="cell" data-empty="true" data-cell="2"></div>
+        <div class="cell" data-empty="true" data-cell="3"></div>
+        <div class="cell" data-empty="true" data-cell="4"></div>
+        <div class="cell" data-empty="true" data-cell="5"></div>
+        <div class="cell" data-empty="true" data-cell="6"></div>
+        <div class="cell" data-empty="true" data-cell="7"></div>
+        <div class="cell" data-empty="true" data-cell="8"></div>
+        <div class="cell" data-empty="true" data-cell="9"></div>
+      </div>
+    </div>
+    <div class="game__footer">
+      <div class="time">00:00</div>
+    </div>
   </div>
   `
   clearMain()
@@ -293,7 +312,9 @@ function timer() {
     .toString()
     .padStart(2, '0')
   const sec = (passed % 60).toString().padStart(2, '0')
-  time.textContent = `${min}:${sec}`
+  if (time) {
+    time.textContent = `${min}:${sec}`
+  }
   endGame = { min: min, sec: sec }
   if (isEnd) {
     return (endGame = { min: min, sec: sec })
@@ -314,17 +335,25 @@ main.addEventListener('click', (e) => {
     clickSnd.play()
     initGame()
   }
-})
-
-backBtn.addEventListener('click', (e) => {
-  clickSnd.play()
-  renderStart()
-})
-
-muteBtn.addEventListener('click', () => {
-  clickSnd.play()
-  music.muted = !music.muted
-  muteBtn.textContent = muteBtn.textContent === 'Mute' ? 'Unmute' : 'Mute'
+  if (e.target.classList.contains('back-btn')) {
+    clickSnd.play()
+    renderStart()
+  }
+  if (e.target.classList.contains('music-btn')) {
+    const musicBtn = document.querySelector('.music-btn')
+    clickSnd.play()
+    if (isMusic) {
+      isMusic = false
+      music.pause()
+      music.currentTime = 0
+      musicBtn.classList.add('off')
+    } else {
+      isMusic = true
+      music.play()
+      musicBtn.classList.remove('off')
+    }
+    musicBtn.textContent = isMusic ? 'On' : 'Off'
+  }
 })
 
 /* init */
