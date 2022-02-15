@@ -4,12 +4,12 @@ let endGame = {}
 let isEnd = false
 let score = localStorage.score ? JSON.parse(localStorage.score) : []
 
-const music = new Audio('sounds/music.mp3')
+const music = new Audio('assets/sounds/music.mp3')
 music.volume = 0.1
 music.loop = true
 
-const clickSnd = new Audio('sounds/click.mp3')
-const moveSnd = new Audio('sounds/move.mp3')
+const clickSnd = new Audio('assets/sounds/click.mp3')
+const moveSnd = new Audio('assets/sounds/move.mp3')
 
 const winCombinations = [
   ['1', '2', '3'],
@@ -158,7 +158,7 @@ function renderResult(result) {
       </table>
     </div>
     <div class="result__restart-btn">
-      <button class="restart-btn">Try again</button>
+      <button class="restart-btn btn">Try again</button>
     </div>
   </div>
   `
