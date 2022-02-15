@@ -1,6 +1,12 @@
+@font-face {
+  font-family: 'TicTacToe';
+  src: url('assets/fonts/TicTacToe.woff');
+}
+
 :root {
   --game-width: 500px;
   --game-height: 500px;
+  --main-font: 600 16px TicTacToe;
 }
 
 html,
@@ -8,12 +14,19 @@ body {
   height: 100%;
   margin: 0;
   padding: 0;
+  font: var(--main-font);
+  font-size: 32px;
 }
 
 body {
   display: flex;
   flex-direction: column;
   justify-content: space-between;
+}
+
+.btn {
+  font: var(--main-font);
+  font-size: 16px;
 }
 
 /* header */
