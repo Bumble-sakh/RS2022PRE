@@ -148,6 +148,11 @@ body {
   font-size: 24px;
 }
 
+.result__title {
+  font-size: 32px;
+  color: var(--off-color);
+}
+
 .result__table {
   margin: 30px 0;
 }
