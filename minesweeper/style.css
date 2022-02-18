@@ -1,0 +1,174 @@
+@font-face {
+  font-family: Classic;
+  src: url(assets/fonts/DSEG7ClassicMini-Bold.woff2);
+}
+
+@font-face {
+  font-family: Minesweeper;
+  src: url(assets/fonts/mine-sweeper.ttf);
+}
+
+html,
+body {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  box-sizing: border-box;
+  background-color: lightgray;
+  font: 400 24px Minesweeper;
+}
+
+.btn {
+  border: none;
+  background: none;
+}
+
+.btn:hover {
+  cursor: pointer;
+}
+
+.link {
+  text-decoration: none;
+  color: black;
+}
+
+.link:hover {
+  color: red;
+  transition: 0.3s;
+}
+
+/* header */
+
+.header {
+  text-align: center;
+  padding: 20px;
+}
+
+/* main */
+
+.main {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+}
+
+.game {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  width: var(--game-width);
+}
+
+.game__header {
+  padding: 24px 24px 0;
+  box-sizing: border-box;
+  background-color: lightgray;
+  border-top: 5px solid white;
+  border-left: 5px solid white;
+  border-right: 5px solid gray;
+}
+
+.menu {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  padding: 16px;
+  box-sizing: border-box;
+  border-top: 5px solid grey;
+  border-left: 5px solid grey;
+  border-bottom: 5px solid white;
+  border-right: 5px solid white;
+}
+
+.mines-counter,
+.timer {
+  font: 400 52px Classic;
+  color: red;
+  background-color: black;
+}
+
+.main-btn {
+  width: 72px;
+  height: 72px;
+  font-size: 54px;
+  margin: 0;
+  padding: 0;
+  border-top: 6px solid white;
+  border-left: 6px solid white;
+  border-bottom: 6px solid gray;
+  border-right: 6px solid gray;
+  font: 400 50px serif;
+}
+
+.main-btn:active {
+  border: 6px solid gray;
+  transform: scale(0.95);
+}
+
+.game__main {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  padding: 24px;
+  box-sizing: border-box;
+  background-color: lightgray;
+  border-left: 5px solid white;
+  border-bottom: 5px solid gray;
+  border-right: 5px solid gray;
+}
+
+.board {
+  display: grid;
+  grid-template-rows: repeat(9, 1fr);
+  grid-template-columns: repeat(9, 1fr);
+  position: relative;
+  box-sizing: border-box;
+  border-top: 5px solid grey;
+  border-left: 5px solid grey;
+  border-bottom: 5px solid white;
+  border-right: 5px solid white;
+}
+
+.cell {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 50px;
+  height: 50px;
+  box-sizing: border-box;
+  background-color: lightgray;
+  border: 1px solid gray;
+}
+
+.cell:hover {
+  cursor: pointer;
+}
+
+.cell.closed {
+  border-top: 4px solid white;
+  border-left: 4px solid white;
+  border-bottom: 4px solid gray;
+  border-right: 4px solid gray;
+}
+
+.cell:active {
+  box-sizing: border-box;
+  background-color: lightgray;
+  border: 1px solid gray;
+}
+
+/* footer */
+
+.footer {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  padding: 20px;
+}
