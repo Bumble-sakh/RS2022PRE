@@ -28,7 +28,7 @@ const unFlagSnd = new Audio('assets/sounds/unflag.wav')
 unFlagSnd.volume = 0.1
 const winSnd = new Audio('assets/sounds/gameWin.wav')
 winSnd.volume = 0.1
-const looseSnd = new Audio('assets/sounds/GameOver.wav')
+const looseSnd = new Audio('assets/sounds/gameOver.wav')
 looseSnd.volume = 0.1
 
 /* UI */
