@@ -102,6 +102,10 @@ function initGame() {
   renderBombs()
   clearBoard()
   setBomb()
+  winSnd.pause()
+  winSnd.currentTime = 0
+  looseSnd.pause()
+  looseSnd.currentTime = 0
 }
 
 function setBomb() {
@@ -381,8 +385,9 @@ board.addEventListener('contextmenu', (e) => {
     }
   }
   if (bombs === 0 && allOpened()) {
-    console.log('Win')
-    initGame()
+    gameIsEnd = true
+    setSmile(3)
+    renderResult('Win')
   }
 })
 
