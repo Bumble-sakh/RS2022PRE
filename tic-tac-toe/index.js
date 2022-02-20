@@ -3,7 +3,7 @@ let startGame = 0
 let endGame = {}
 let isEnd = false
 let isMusic = false
-let score = localStorage.score ? JSON.parse(localStorage.score) : []
+let score = localStorage.score1337 ? JSON.parse(localStorage.score1337) : []
 
 const music = new Audio('assets/sounds/music.mp3')
 music.volume = 0.1
@@ -138,7 +138,7 @@ function renderResult(result) {
   const gameResult = [result, result === 'draw' ? '' : symbol, turn, endGame]
   score.unshift(gameResult)
   score.length = score.length > 10 ? 10 : score.length
-  localStorage.setItem('score', JSON.stringify(score))
+  localStorage.setItem('score1337', JSON.stringify(score))
 
   const resultBlock = `
   <div class="result">
