@@ -21,7 +21,7 @@ let score = localStorage.score1337mine
 
 /* UI */
 
-const smiles = ['&#128522;', '&#128558;', '&#128565;']
+const smiles = ['&#128522;', '&#128558;', '&#128565;', '&#128526;']
 const board = document.querySelector('.board')
 const button = document.querySelector('.main-btn')
 const timerView = document.querySelector('.timer')
@@ -247,6 +247,7 @@ function openCell(x, y) {
     cell.textContent = table[y][x]
 
     gameIsEnd = true
+    setSmile(2)
     renderResult('loose')
   } else if (+table[y][x] > 0) {
     cell.classList.remove('closed')
@@ -256,6 +257,7 @@ function openCell(x, y) {
 
   if (bombs === 0 && allOpened()) {
     gameIsEnd = true
+    setSmile(3)
     renderResult('win')
   }
 }
@@ -388,11 +390,6 @@ board.addEventListener('click', (e) => {
 //     setSmile(0)
 //   }
 
-//   if (e.button === 2) {
-//     if (e.target.classList.contains('closed')) {
-//       e.target.classList.toggle('flag')
-//     }
-//   }
 // })
 
 // board.addEventListener('mouseover', (e) => {
