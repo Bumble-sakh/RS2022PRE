@@ -15,6 +15,9 @@ let timer = 0
 let bombs = 10
 let gameIsEnd = true
 let isMouseDown = false
+let score = localStorage.score1337mine
+  ? JSON.parse(localStorage.score1337mine)
+  : []
 
 /* UI */
 
@@ -22,6 +25,8 @@ const smiles = ['&#128522;', '&#128558;', '&#128565;']
 const board = document.querySelector('.board')
 const button = document.querySelector('.main-btn')
 const timerView = document.querySelector('.timer')
+const bombsView = document.querySelector('.mines-counter')
+const game = document.querySelector('.game__main')
 
 /* classes */
 
@@ -82,6 +87,7 @@ function initGame() {
   bombs = 10
   setSmile(0)
   renderTimer()
+  renderBombs()
   clearBoard()
   setBomb()
 }
@@ -90,12 +96,12 @@ function setBomb() {
   const count = 10
   const bombsPositions = new Set()
   while (bombsPositions.size < count) {
-    const x = Math.floor(0 + Math.random() * (8 + 1 - 0))
-    const y = Math.floor(0 + Math.random() * (8 + 1 - 0))
-    bombsPositions.add({ x: x, y: y })
+    const x = Math.floor(0 + Math.random() * (8 + 1 - 0)).toString()
+    const y = Math.floor(0 + Math.random() * (8 + 1 - 0)).toString()
+    bombsPositions.add(x + y)
   }
   bombsPositions.forEach((bomb) => {
-    table[bomb.x][bomb.y] = '*'
+    table[bomb[0]][bomb[1]] = '*'
   })
   setTable()
 }
@@ -152,12 +158,65 @@ function renderTimer() {
   timerView.textContent = timer.toString().padStart(3, 0)
 }
 
+function renderBombs() {
+  bombsView.textContent = bombs.toString().padStart(3, 0)
+}
+
+function renderResult(result) {
+  board.classList.add('hidden')
+
+  const gameResult = [result, timer]
+  score.unshift(gameResult)
+  score.length = score.length > 10 ? 10 : score.length
+  localStorage.setItem('score1337mine', JSON.stringify(score))
+
+  const resultBlock = `
+  <div class="result">
+    <div class="result__title">${result}
+  </div>
+    <div class="result__turns">${timer} seconds</div>
+    <div class="result__table">
+      <table class="table">
+        <thead>
+          <tr>
+            <th>Result</th>
+            <th>Time</th>
+          </tr>
+        </thead>  
+        <tbody>
+          ${renderScore()}
+        </tbody>
+      </table>
+    </div>
+  </div>
+  `
+  game.insertAdjacentHTML('afterbegin', resultBlock)
+}
+
+function renderScore() {
+  let rows = ''
+  for (let i = 0; i < score.length; i++) {
+    rows += `<tr>
+              <td>${score[i][0]}</td>
+              <td>${score[i][1]}</td>
+            </tr>`
+  }
+  return rows
+}
+
 function clearBoard() {
+  const result = document.querySelector('.result')
+  if (result) {
+    result.remove()
+    board.classList.remove('hidden')
+  }
   for (const cell of board.children) {
-    cell.innerHTML = ''
-    cell.classList.remove(...cell.classList)
-    cell.classList.add('cell')
-    cell.classList.add('closed')
+    if (cell.classList.contains('cell')) {
+      cell.innerHTML = ''
+      cell.classList.remove(...cell.classList)
+      cell.classList.add('cell')
+      cell.classList.add('closed')
+    }
   }
 }
 
@@ -186,12 +245,27 @@ function openCell(x, y) {
     cell.classList.add('opened')
     cell.classList.add('bomb')
     cell.textContent = table[y][x]
+
+    gameIsEnd = true
+    renderResult('loose')
   } else if (+table[y][x] > 0) {
     cell.classList.remove('closed')
     cell.classList.add('opened')
     cell.textContent = table[y][x]
-    // if all opened - win()
   }
+
+  if (bombs === 0 && allOpened()) {
+    gameIsEnd = true
+    renderResult('win')
+  }
+}
+
+function allOpened() {
+  let count = 0
+  for (let cell of board.children) {
+    count += cell.classList.contains('opened') ? 1 : -1
+  }
+  return count === 81 ? true : false
 }
 
 function getAround(x, y) {
@@ -258,6 +332,21 @@ button.addEventListener('click', () => {
 
 board.addEventListener('contextmenu', (e) => {
   e.preventDefault()
+  if (e.target.classList.contains('closed')) {
+    e.target.classList.toggle('flag')
+    e.target.classList.toggle('opened')
+    if (e.target.classList.contains('flag')) {
+      bombs--
+      renderBombs()
+    } else {
+      bombs++
+      renderBombs()
+    }
+  }
+  if (bombs === 0 && allOpened()) {
+    console.log('win')
+    initGame()
+  }
 })
 
 board.addEventListener('mouseover', (e) => {
@@ -271,7 +360,7 @@ board.addEventListener('mouseover', (e) => {
   }
 })
 
-board.addEventListener('click', () => {
+board.addEventListener('click', (e) => {
   if (gameIsEnd) {
     startGame()
   }
