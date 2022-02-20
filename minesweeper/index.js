@@ -1,5 +1,16 @@
 /* variables */
-
+let table = [
+  ['0', '0', '0', '0', '0', '0', '0', '0', '0'],
+  ['0', '0', '0', '0', '0', '0', '0', '0', '0'],
+  ['0', '0', '0', '0', '0', '0', '0', '0', '0'],
+  ['0', '0', '0', '0', '0', '0', '0', '0', '0'],
+  ['0', '0', '0', '0', '0', '0', '0', '0', '0'],
+  ['0', '0', '0', '0', '0', '0', '0', '0', '0'],
+  ['0', '0', '0', '0', '0', '0', '0', '0', '0'],
+  ['0', '0', '0', '0', '0', '0', '0', '0', '0'],
+  ['0', '0', '0', '0', '0', '0', '0', '0', '0'],
+]
+let queue = new Set()
 let timer = 0
 let bombs = 10
 let gameIsEnd = true
@@ -16,17 +27,30 @@ const timerView = document.querySelector('.timer')
 
 class Mouse {
   constructor() {
-    this._position = null
+    this._x = null
+    this._y = null
     this._isUp = null
     this._isDown = null
   }
 
   get position() {
-    return this._position
+    return { x: this._x, y: this._y }
   }
 
-  set position(position) {
-    this._position = position
+  get x() {
+    return this._x
+  }
+
+  set x(x) {
+    this._x = x
+  }
+
+  get y() {
+    return this._y
+  }
+
+  set y(y) {
+    this._y = y
   }
 
   get isDown() {
@@ -43,12 +67,66 @@ const mouse = new Mouse()
 /* functions */
 
 function initGame() {
+  table = [
+    ['0', '0', '0', '0', '0', '0', '0', '0', '0'],
+    ['0', '0', '0', '0', '0', '0', '0', '0', '0'],
+    ['0', '0', '0', '0', '0', '0', '0', '0', '0'],
+    ['0', '0', '0', '0', '0', '0', '0', '0', '0'],
+    ['0', '0', '0', '0', '0', '0', '0', '0', '0'],
+    ['0', '0', '0', '0', '0', '0', '0', '0', '0'],
+    ['0', '0', '0', '0', '0', '0', '0', '0', '0'],
+    ['0', '0', '0', '0', '0', '0', '0', '0', '0'],
+    ['0', '0', '0', '0', '0', '0', '0', '0', '0'],
+  ]
   timer = 0
   bombs = 10
   setSmile(0)
   renderTimer()
   clearBoard()
-  // setBomb()
+  setBomb()
+}
+
+function setBomb() {
+  const count = 10
+  const bombsPositions = new Set()
+  while (bombsPositions.size < count) {
+    const x = Math.floor(0 + Math.random() * (8 + 1 - 0))
+    const y = Math.floor(0 + Math.random() * (8 + 1 - 0))
+    bombsPositions.add({ x: x, y: y })
+  }
+  bombsPositions.forEach((bomb) => {
+    table[bomb.x][bomb.y] = '*'
+  })
+  setTable()
+}
+
+function setTable() {
+  table.forEach((row, y) => {
+    row.forEach((cell, x) => {
+      table[y][x] = setAround(x, y)
+    })
+  })
+}
+
+function setAround(x, y) {
+  let count = 0
+
+  if (table[y][x] === '*') return '*'
+  if (table[y - 1]) {
+    if (table[y - 1][x - 1] === '*') count++
+    if (table[y - 1][x] === '*') count++
+    if (table[y - 1][x + 1] === '*') count++
+  }
+
+  if (table[y][x - 1] === '*') count++
+  if (table[y][x + 1] === '*') count++
+
+  if (table[y + 1]) {
+    if (table[y + 1][x - 1] === '*') count++
+    if (table[y + 1][x] === '*') count++
+    if (table[y + 1][x + 1] === '*') count++
+  }
+  return count.toString()
 }
 
 function startGame() {
@@ -83,6 +161,94 @@ function clearBoard() {
   }
 }
 
+function openCell(x, y) {
+  const cell = document.querySelector(`[data-position='${y}${x}']`)
+
+  x = parseInt(x)
+  y = parseInt(y)
+
+  if (cell.classList.contains('opened')) {
+    return null
+  }
+
+  if (table[y][x] === '0') {
+    cell.classList.remove('closed')
+    cell.classList.add('opened')
+    cell.textContent = ''
+
+    getAround(x, y).forEach((cell) => {
+      openCell(cell.x, cell.y)
+    })
+  }
+
+  if (table[y][x] === '*') {
+    cell.classList.remove('closed')
+    cell.classList.add('opened')
+    cell.classList.add('bomb')
+    cell.textContent = table[y][x]
+  } else if (+table[y][x] > 0) {
+    cell.classList.remove('closed')
+    cell.classList.add('opened')
+    cell.textContent = table[y][x]
+    // if all opened - win()
+  }
+}
+
+function getAround(x, y) {
+  const out = []
+
+  if (table[y - 1] !== undefined) {
+    if (table[y - 1][x - 1] !== undefined)
+      out.push({
+        x: x - 1,
+        y: y - 1,
+      })
+    if (table[y - 1][x] !== undefined)
+      out.push({
+        x: x,
+        y: y - 1,
+      })
+    if (table[y - 1][x + 1] !== undefined)
+      out.push({
+        x: x + 1,
+        y: y - 1,
+      })
+  }
+
+  if (table[y][x - 1] !== undefined)
+    out.push({
+      x: x - 1,
+      y: y,
+    })
+  if (table[y][x + 1] !== undefined)
+    out.push({
+      x: x + 1,
+      y: y,
+    })
+
+  if (table[y + 1] !== undefined) {
+    if (table[y + 1][x - 1] !== undefined)
+      out.push({
+        x: x - 1,
+        y: y + 1,
+      })
+    if (table[y + 1][x] !== undefined)
+      out.push({
+        x: x,
+        y: y + 1,
+      })
+    if (table[y + 1][x + 1] !== undefined)
+      out.push({
+        x: x + 1,
+        y: y + 1,
+      })
+  }
+
+  // console.log(out)
+
+  return out
+}
+
 /* listeners */
 
 button.addEventListener('click', () => {
@@ -96,18 +262,21 @@ board.addEventListener('contextmenu', (e) => {
 
 board.addEventListener('mouseover', (e) => {
   if (e.target.classList.contains('cell')) {
-    mouse.position = e.target.dataset.position
-    console.log(mouse.position)
+    mouse.y = e.target.dataset.position[0]
+    mouse.x = e.target.dataset.position[1]
+    // console.log(mouse.position)
   } else {
-    mouse.position = null
+    mouse.y = null
+    mouse.x = null
   }
 })
 
-// board.addEventListener('click', () => {
-//   if (gameIsEnd) {
-//     startGame()
-//   }
-// })
+board.addEventListener('click', () => {
+  if (gameIsEnd) {
+    startGame()
+  }
+  openCell(mouse.x, mouse.y)
+})
 
 // board.addEventListener('mousedown', (e) => {
 //   if (e.button === 0) {
