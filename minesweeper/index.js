@@ -19,6 +19,18 @@ let score = localStorage.score1337mine
   ? JSON.parse(localStorage.score1337mine)
   : []
 
+/* sounds */
+const clickSnd = new Audio('assets/sounds/click.wav')
+clickSnd.volume = 0.1
+const flagSnd = new Audio('assets/sounds/flag.wav')
+flagSnd.volume = 0.1
+const unFlagSnd = new Audio('assets/sounds/unflag.wav')
+unFlagSnd.volume = 0.1
+const winSnd = new Audio('assets/sounds/gameWin.wav')
+winSnd.volume = 0.1
+const looseSnd = new Audio('assets/sounds/GameOver.wav')
+looseSnd.volume = 0.1
+
 /* UI */
 
 const smiles = ['&#128522;', '&#128558;', '&#128565;', '&#128526;']
@@ -165,6 +177,8 @@ function renderBombs() {
 function renderResult(result) {
   board.classList.add('hidden')
 
+  result === 'Win' ? winSnd.play() : looseSnd.play()
+
   const gameResult = [result, timer]
   score.unshift(gameResult)
   score.length = score.length > 10 ? 10 : score.length
@@ -230,6 +244,8 @@ function openCell(x, y) {
     return null
   }
 
+  clickSnd.play()
+
   if (table[y][x] === '0') {
     cell.classList.remove('closed')
     cell.classList.add('opened')
@@ -248,7 +264,7 @@ function openCell(x, y) {
 
     gameIsEnd = true
     setSmile(2)
-    renderResult('loose')
+    renderResult('Loose')
   } else if (+table[y][x] > 0) {
     cell.classList.remove('closed')
     cell.classList.add('opened')
@@ -258,7 +274,7 @@ function openCell(x, y) {
   if (bombs === 0 && allOpened()) {
     gameIsEnd = true
     setSmile(3)
-    renderResult('win')
+    renderResult('Win')
   }
 }
 
@@ -334,13 +350,16 @@ button.addEventListener('click', () => {
 
 board.addEventListener('contextmenu', (e) => {
   e.preventDefault()
+
   if (e.target.classList.contains('closed')) {
     e.target.classList.toggle('flag')
     e.target.classList.toggle('opened')
     if (e.target.classList.contains('flag')) {
+      flagSnd.play()
       bombs--
       renderBombs()
     } else {
+      unFlagSnd.play()
       bombs++
       renderBombs()
     }
@@ -368,62 +387,6 @@ board.addEventListener('click', (e) => {
   }
   openCell(mouse.x, mouse.y)
 })
-
-// board.addEventListener('mousedown', (e) => {
-//   if (e.button === 0) {
-//     e.preventDefault()
-//     isMouseDown = true
-//     if (
-//       !e.target.classList.contains('flag') &&
-//       !e.target.classList.contains('opened')
-//     ) {
-//       setSmile(1)
-//       e.target.classList.remove('closed')
-//       e.target.classList.add('opened')
-//     }
-//   }
-// })
-
-// board.addEventListener('mouseup', (e) => {
-//   if (e.button === 0) {
-//     isMouseDown = false
-//     setSmile(0)
-//   }
-
-// })
-
-// board.addEventListener('mouseover', (e) => {
-//   if (isMouseDown) {
-//     if (!e.target.classList.contains('flag')) {
-//       e.target.classList.remove('closed')
-//     } else {
-//       setSmile(0)
-//     }
-//   }
-//   if (!e.target.classList.contains('cell')) {
-//     isMouseDown = false
-//     setSmile(0)
-//   }
-// })
-
-// board.addEventListener('mouseout', (e) => {
-//   if (isMouseDown && e.target.classList.contains('cell')) {
-//     if (
-//       !e.target.classList.contains('flag') &&
-//       !e.target.classList.contains('opened')
-//     ) {
-//       setSmile(1)
-//       e.target.classList.add('closed')
-//     }
-//   }
-// })
-
-// document.body.addEventListener('mouseover', (e) => {
-//   if (!e.target.classList.contains('cell')) {
-//     isMouseDown = false
-//     setSmile(0)
-//   }
-// })
 
 /* init */
 
