@@ -10,3 +10,4 @@ Private repository for @bumble-sakh
 - [Random quotes](https://rolling-scopes-school.github.io/bumble-sakh-JSFEPRESCHOOL/random-quotes/)
 - [Image gallery](https://rolling-scopes-school.github.io/bumble-sakh-JSFEPRESCHOOL/image-gallery/)
 - [Tic tac toe](https://rolling-scopes-school.github.io/bumble-sakh-JSFEPRESCHOOL/tic-tac-toe/)
+- [Minesweeper](https://rolling-scopes-school.github.io/bumble-sakh-JSFEPRESCHOOL/minesweeper/)
