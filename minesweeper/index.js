@@ -381,7 +381,7 @@ board.addEventListener('contextmenu', (e) => {
     }
   }
   if (bombs === 0 && allOpened()) {
-    console.log('win')
+    console.log('Win')
     initGame()
   }
 })
