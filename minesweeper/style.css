@@ -158,11 +158,9 @@ body {
   border-right: 4px solid gray;
 }
 
-.cell:active {
-  box-sizing: border-box;
-  background-color: lightgray;
-  border: 1px solid gray;
-}
+.cell.flag::before {
+  content: '`';
+  color: red;
 
 /* footer */
 
